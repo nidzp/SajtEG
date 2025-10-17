@@ -1,58 +1,248 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
 <html lang="sr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Electrogroup ITS</title>
-
-  <!-- AOS CSS iz node_modules -->
-  <link rel="stylesheet" href="./node_modules/aos/dist/aos.css" />
-
-  <link rel="stylesheet" href="./styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ELECTROGROUP ITS – Elektroinstalacije & Solarne elektrane</title>
   <style>
-    /* Minimalni stil da se vidi animacija */
-    :root { --primary:#0b65ff; --bg:#0b1120; --fg:#e5e7eb; }
-    html, body { height:100%; background:var(--bg); color:var(--fg); font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 32px; }
-    .hero { padding: 96px 0 48px; }
-    .hero h1 { font-size: clamp(32px, 4vw, 56px); color: var(--primary); margin-bottom: 12px; opacity:0; transform: translateY(20px); }
-    .hero p { font-size: clamp(16px, 2vw, 20px); opacity:0; transform: translateY(20px); }
-    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); margin-top: 48px; }
-    .card { background: #0f172a; border: 1px solid #1f2a44; padding: 20px; border-radius: 16px; }
-    .card h3 { margin-bottom: 8px; }
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; line-height: 1.6; }
+    header, #lang-switcher, section, footer { padding: 20px; }
+    header { background: #003366; color: #fff; text-align: center; }
+    header h1 { margin: 0; font-size: 2em; }
+    header p { margin: 5px 0 15px; font-size: 1.2em; }
+    .button { background: #f58634; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin: 5px; display: inline-block; }
+    .button:hover { opacity: 0.9; }
+    #lang-switcher { text-align: right; border-bottom: 1px solid #ccc; }
+    #lang-switcher button { margin-left: 5px; }
+    section h2 { border-bottom: 2px solid #f58634; padding-bottom: 5px; }
+    section h3 { color: #003366; }
+    figure { margin: 0 0 10px; text-align: center; }
+    figure img { max-width: 100%; height: auto; }
+    ul { list-style: disc inside; padding-left: 0; }
+    /* Dark mode styles */
+    body.dark-mode { background: #111; color: #eee; }
+    body.dark-mode header { background: #000; }
+    body.dark-mode a.button { background: #444; color: #fff; }
+    body.dark-mode section h2, body.dark-mode section h3 { color: #ffa; }
+    /* Language script toggle styles */
+    #content-sr .cyr { display: none; }
+    #content-sr.cyrillic .cyr { display: inline; }
+    #content-sr.cyrillic .lat { display: none; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <section class="hero">
-      <h1 id="heroTitle">Electrogroup ITS</h1>
-      <p id="heroSubtitle">Instalacije, pametne mreže i vrhunska preciznost.</p>
+
+<header>
+  <h1>ELECTROGROUP ITS DOO</h1>
+  <p>
+    <span class="lat">Elektroinstalacije i solarne elektrane širom Srbije</span>
+    <span class="cyr">Електроинсталације и соларне електране широм Србије</span>
+  </p>
+  <p>
+    <span class="lat">Vaš pouzdan partner za elektroinstalacije i obnovljive izvore energije.</span>
+    <span class="cyr">Ваш поуздан партнер за електроинсталације и обновљиве изворе енергије.</span>
+  </p>
+  <a href="#contact" class="button">
+    <span class="lat">Zakaži obilazak</span><span class="cyr">Закажи обилазак</span>
+  </a>
+  <a href="#contact" class="button">
+    <span class="lat">Pošalji upit</span><span class="cyr">Пошаљи упит</span>
+  </a>
+</header>
+
+<div id="lang-switcher">
+  <!-- Language and mode switch buttons -->
+  <button onclick="setLang('sr')">SR</button>
+  <button onclick="setLang('en')">EN</button>
+  <button onclick="toggleScript()">Ćir/Lat</button>
+  <button onclick="document.body.classList.toggle('dark-mode')">Dark Mode</button>
+</div>
+
+<!-- Serbian content -->
+<div id="content-sr">
+  <section>
+    <h2>
+      <span class="lat">Usluge</span><span class="cyr">Услуге</span>
+    </h2>
+
+    <section id="elektroinstalacije">
+      <h3>
+        <span class="lat">Elektroinstalacije 0,4–20 kV</span>
+        <span class="cyr">Електроинсталације 0,4–20 кВ</span>
+      </h3>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Camp_Lejeune,_NC,_Sept._06_damaged_powerline_repair_(5727150).jpg/1280px-Camp_Lejeune,_NC,_Sept._06_damaged_powerline_repair_(5727150).jpg" alt="Rad na elektroenergetskoj mreži 0,4–20kV">
+      </figure>
+      <p>
+        <span class="lat">Izvodimo kompletne elektroinstalacije niskog (0,4 kV) i srednjeg napona (do 20 kV). Naš tim postavlja kablovske mreže, razvodne ormare, stubne i betonske trafostanice, kao i nadzemne i podzemne vodove – sve po sistemu "ključ u ruke".</span>
+        <span class="cyr">Изводимо комплетне електроинсталације ниског (0,4 кВ) и средњег напона (до 20 кВ). Наш тим поставља кабловске мреже, разводне ормаре, стубне и бетонске трафостанице, као и надземне и подземне водове – све по систему "кључ у руке".</span>
+      </p>
     </section>
 
-    <section class="grid">
-      <div class="card" data-aos="fade-up">
-        <h3>0,4 kV kablovski vodovi</h3>
-        <p>Projektovanje i izvođenje niskonaponskih instalacija.</p>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="100">
-        <h3>KPK i kablovske trase</h3>
-        <p>Profesionalna ugradnja KPK kutija, rovova i cevi.</p>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="200">
-        <h3>PP00-A kablovi</h3>
-        <p>Polaganje 1kV PP00-A 4150 mm prema specifikaciji.</p>
-      </div>
-      <div class="card" data-aos="fade-up" data-aos-delay="300">
-        <h3>Dokumentacija</h3>
-        <p>Predmeri, troškovnici i kompletna evidencija.</p>
-      </div>
+    <section id="solarne">
+      <h3>
+        <span class="lat">Solarne elektrane (FNE)</span>
+        <span class="cyr">Соларне електране (ФНЕ)</span>
+      </h3>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/An_ex-coal_mine_reworked_as_North_Macedonia%E2%80%99s_first_large_solar_plant_(9262).jpg/1280px-An_ex-coal_mine_reworked_as_North_Macedonia%E2%80%99s_first_large_solar_plant_(9262).jpg" alt="Solarna elektrana">
+      </figure>
+      <p>
+        <span class="lat">Projektujemo i gradimo fotonaponske solarne elektrane za preduzeća, poljoprivredna gazdinstva i domaćinstva. Nudimo kompletnu uslugu nabavke opreme, montaže solarnih panela, invertora i prateće instalacije, kao i priključenje na mrežu uz potrebnu dokumentaciju.</span>
+        <span class="cyr">Пројектујемо и градимо фотонапонске соларне електране за предузећа, пољопривредна газдинства и домаћинства. Нудимо комплетну услугу набавке опреме, монтаже соларних панела, инвертора и пратеће инсталације, као и прикључење на мрежу уз потребну документацију.</span>
+      </p>
     </section>
-  </div>
 
-  <!-- GSAP i AOS iz node_modules (redosled bitan) -->
-  <script src="./node_modules/gsap/dist/gsap.min.js"></script>
-  <script src="./node_modules/aos/dist/aos.js"></script>
+    <section id="kablovski">
+      <h3>
+        <span class="lat">Zemljani i kablovski radovi</span>
+        <span class="cyr">Земљани и кабловски радови</span>
+      </h3>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Trench_USA-fiber.jpg/960px-Trench_USA-fiber.jpg" alt="Iskop rova za kablovske instalacije">
+      </figure>
+      <p>
+        <span class="lat">Izvodimo sve vrste iskopnih radova za polaganje elektro i telekomunikacionih kablova. Posedujemo mehanizaciju za kopanje rovova i polaganje kablovskih instalacija, uključujući postavljanje zaštitnih cevi, kablovske kanalizacije i zatrpavanje uz vraćanje terena u prvobitno stanje.</span>
+        <span class="cyr">Изводимо све врсте ископних радова за полагање електро и телекомуникационих каблова. Поседујемо механизацију за копање ровова и полагање кабловских инсталација, укључујући постављање заштитних цеви, кабловске канализације и затрпавање уз враћање терена у првобитно стање.</span>
+      </p>
+    </section>
+  </section>
 
-  <script src="./main.js"></script>
+  <section>
+    <h2>
+      <span class="lat">Reference</span><span class="cyr">Референце</span>
+    </h2>
+    <p>
+      <span class="lat">Ponosni smo na veliki broj uspešno realizovanih projekata širom zemlje</span><span class="cyr">Поносни смо на велики број успешно реализованих пројеката широм земље</span>:contentReference[oaicite:0]{index=0}. 
+      <span class="lat">Neki od naših nedavnih projekata uključuju postavljanje solarnih panela na komercijalnim objektima, izgradnju privatnih solarnih elektrana na salašima, kao i instalaciju distributivnih kablovskih mreža u više gradova.</span>
+      <span class="cyr">Неки од наших недавних пројеката укључују постављање соларних панела на комерцијалним објектима, изградњу приватних соларних електрана на салашима, као и инсталацију дистрибутивних кабловских мрежа у више градова.</span> 
+      <span class="lat">Posebno ističemo projekat solarne elektrane u Zmajevu (opština Vrbas)</span><span class="cyr">Посебно истичемо пројекат соларне електране у Змајеву (општина Врбас)</span>:contentReference[oaicite:1]{index=1}<span class="lat">, kao i mnoge druge realizacije.</span><span class="cyr">, као и многе друге реализације.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2>
+      <span class="lat">Zašto mi?</span><span class="cyr">Зашто ми?</span>
+    </h2>
+    <ul>
+      <li>
+        <span class="lat">Finansijska pouzdanost – A+ bonitetna ocena za 2025</span><span class="cyr">Финансијска поузданост – А+ бонитетна оцена за 2025</span>:contentReference[oaicite:2]{index=2}<span class="lat">, bez blokada računa</span><span class="cyr">, без блокада рачуна</span>:contentReference[oaicite:3]{index=3}.
+      </li>
+      <li>
+        <span class="lat">Iskustvo i stručnost – Tim licenciranih inženjera i električara (preduzeće posluje od 2022.</span><span class="cyr">Искуство и стручност – Тим лиценцираних инжењера и електричара (предузеће послује од 2022.</span>:contentReference[oaicite:4]{index=4}<span class="lat"> i zapošljava 16 radnika)</span><span class="cyr"> и запошљава 16 радника)</span>:contentReference[oaicite:5]{index=5}.
+      </li>
+      <li>
+        <span class="lat">Poštovanje rokova – Projekte realizujemo u dogovorenim vremenskim okvirima uz punu posvećenost.</span>
+        <span class="cyr">Поштовање рокова – Пројекте реализујемо у договореним временским оквирима уз пуну посвећеност.</span>
+      </li>
+      <li>
+        <span class="lat">Garancija kvaliteta – Koristimo proverenu opremu uz pisane garancije na izvedene radove.</span>
+        <span class="cyr">Гаранција квалитета – Користимо проверену опрему уз писане гаранције на изведене радове.</span>
+      </li>
+      <li>
+        <span class="lat">Bezbednost na prvom mestu – Svi radovi se izvode uz primenu najviših bezbednosnih standarda.</span>
+        <span class="cyr">Безбедност на првом месту – Сви радови се изводе уз примену највиших безбедносних стандарда.</span>
+      </li>
+      <li>
+        <span class="lat">Prijateljski pristup – Otvoreno sarađujemo sa klijentima i toplo primamo svaku vašu ideju.</span>
+        <span class="cyr">Пријатељски приступ – Отворено сарађујемо са клијентима и топло примамо сваку вашу идеју.</span>
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>
+      <span class="lat">Kontakt</span><span class="cyr">Контакт</span>
+    </h2>
+    <p>
+      <strong><span class="lat">Adresa:</span><span class="cyr">Адреса:</span></strong> 
+      <span class="lat">Kosovska 48, 25101 Sombor, Srbija</span><span class="cyr">Косовска 48, 25101 Сомбор, Србија</span>:contentReference[oaicite:6]{index=6}<br>
+      <strong><span class="lat">Telefon:</span><span class="cyr">Телефон:</span></strong> 
+      <span class="lat">063/108-5618</span><span class="cyr">063/108-5618</span>:contentReference[oaicite:7]{index=7}<br>
+      <strong><span class="lat">E-mail:</span><span class="cyr">Е-маил:</span></strong> 
+      <a href="mailto:office@electrogroup.rs">office@electrogroup.rs</a>:contentReference[oaicite:8]{index=8}
+    </p>
+    <form>
+      <p><input type="text" name="name" placeholder="Vaše ime"></p>
+      <p><input type="email" name="email" placeholder="Vaša e-mail adresa"></p>
+      <p><textarea name="message" placeholder="Vaša poruka"></textarea></p>
+      <p><button type="submit">
+        <span class="lat">Pošalji</span><span class="cyr">Пошаљи</span>
+      </button></p>
+    </form>
+  </section>
+</div>
+
+<!-- English content -->
+<div id="content-en" style="display:none;">
+  <section>
+    <h2>Services</h2>
+    <section>
+      <h3>Electrical Installations (0.4–20 kV)</h3>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Camp_Lejeune,_NC,_Sept._06_damaged_powerline_repair_(5727150).jpg/1280px-Camp_Lejeune,_NC,_Sept._06_damaged_powerline_repair_(5727150).jpg" alt="Work on power distribution network">
+      </figure>
+      <p>We design and install complete electrical infrastructure for low-voltage (0.4 kV) and medium-voltage (up to 20 kV) systems. Our team delivers turnkey solutions including cable networks, distribution panels, pole-mounted and concrete substations, as well as overhead and underground power lines.</p>
+    </section>
+    <section>
+      <h3>Solar Power Plants</h3>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/An_ex-coal_mine_reworked_as_North_Macedonia%E2%80%99s_first_large_solar_plant_(9262).jpg/1280px-An_ex-coal_mine_reworked_as_North_Macedonia%E2%80%99s_first_large_solar_plant_(9262).jpg" alt="Solar power plant">
+      </figure>
+      <p>We design and construct photovoltaic solar power plants for businesses, agricultural estates, and households. Our services cover the entire process: equipment procurement, solar panel and inverter installation, full electrical integration, and grid connection with all required documentation.</p>
+    </section>
+    <section>
+      <h3>Earthworks & Cable Laying</h3>
+      <figure>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Trench_USA-fiber.jpg/960px-Trench_USA-fiber.jpg" alt="Trench digging for cable installation">
+      </figure>
+      <p>We perform all types of excavation works for laying electrical and telecommunication cables. Our machinery and skilled operators ensure efficient trench digging, cable conduit installation, and backfilling – restoring the site to its original condition after laying the necessary infrastructure.</p>
+    </section>
+  </section>
+
+  <section>
+    <h2>Projects</h2>
+    <p>We take pride in a large number of successfully completed projects across Serbia:contentReference[oaicite:9]{index=9}. Our recent work includes installing solar panels on commercial buildings, building private solar power plants on farms, and deploying distribution cable networks in multiple cities. Notably, we are developing a solar power plant in Zmajevo (Vrbas municipality):contentReference[oaicite:10]{index=10}, among many other projects.</p>
+  </section>
+
+  <section>
+    <h2>Why Choose Us?</h2>
+    <ul>
+      <li>Financial stability – A+ credit rating in 2025:contentReference[oaicite:11]{index=11} with no account blocks:contentReference[oaicite:12]{index=12}.</li>
+      <li>Experience & expertise – A licensed team of engineers and electricians (operating since 2022:contentReference[oaicite:13]{index=13} and currently 16 employees:contentReference[oaicite:14]{index=14}).</li>
+      <li>On-time delivery – We complete every project within the agreed timeline with full commitment.</li>
+      <li>Quality guarantee – We use proven equipment and provide written warranties for our work.</li>
+      <li>Safety first – All work is carried out under the highest safety standards.</li>
+      <li>Friendly approach – We work closely with clients and warmly welcome every idea.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p><strong>Address:</strong> Kosovska 48, 25101 Sombor, Serbia:contentReference[oaicite:15]{index=15}<br>
+       <strong>Phone:</strong> +381 63 1085618:contentReference[oaicite:16]{index=16}<br>
+       <strong>Email:</strong> <a href="mailto:office@electrogroup.rs">office@electrogroup.rs</a>:contentReference[oaicite:17]{index=17}</p>
+    <form>
+      <p><input type="text" name="name" placeholder="Your Name"></p>
+      <p><input type="email" name="email" placeholder="Your Email"></p>
+      <p><textarea name="message" placeholder="Your Message"></textarea></p>
+      <p><button type="submit">Send</button></p>
+    </form>
+  </section>
+</div>
+
+<script>
+  function setLang(lang) {
+    document.getElementById('content-sr').style.display = (lang === 'sr') ? 'block' : 'none';
+    document.getElementById('content-en').style.display = (lang === 'en') ? 'block' : 'none';
+  }
+  function toggleScript() {
+    var srContent = document.getElementById('content-sr');
+    srContent.classList.toggle('cyrillic');
+  }
+  // Default: show Serbian content in Latin script
+  setLang('sr');
+</script>
+
 </body>
 </html>
