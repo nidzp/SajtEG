@@ -1,0 +1,24 @@
+{
+  "name": "sajteg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nidzp/SajtEG.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nidzp/SajtEG/issues"
+  },
+  "homepage": "https://github.com/nidzp/SajtEG#readme",
+  "dependencies": {
+    "aos": "^2.3.4",
+    "gsap": "^3.13.0"
+  }
+}
