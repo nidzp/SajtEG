@@ -140,10 +140,22 @@ document.addEventListener('DOMContentLoaded', () => {
         chatOptions.forEach(option => {
             option.addEventListener('click', () => {
                 const key = option.dataset.answer;
+                const answerText = responses[key] || '';
                 if (responseText) {
-                    responseText.textContent = responses[key] || '';
+                    responseText.textContent = answerText;
                 }
                 if (chatResponse) chatResponse.classList.remove('hidden');
+                if (window.sessionStorage) {
+                    try {
+                        const summary = {
+                            question: option.textContent.trim(),
+                            answer: answerText
+                        };
+                        sessionStorage.setItem('chatSummary', JSON.stringify(summary));
+                    } catch (error) {
+                        console.warn('Nije moguće sačuvati istoriju razgovora u pregledaču.', error);
+                    }
+                }
             });
         });
         if (contactBtn) {

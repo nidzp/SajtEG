@@ -176,6 +176,37 @@
             </div>
         </div>
     </section>
+    <!-- Direct contact form for visitors -->
+    <section class="section contact-form-section" id="contact-section">
+        <div class="container">
+            <h2>Pošaljite nam poruku</h2>
+            <form id="contact-form" class="contact-form" action="https://formsubmit.co/nikola.djokic@electrogroup.rs" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_subject" value="Novi upit sa sajta ELECTROGROUP">
+                <input type="hidden" id="ai-hidden" name="AI asistent">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="full-name">Ime i prezime</label>
+                        <input type="text" id="full-name" name="Ime i prezime" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="client-email">Email</label>
+                        <input type="email" id="client-email" name="Email" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Šta vam je potrebno?</label>
+                    <textarea id="message" name="Poruka" rows="5" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ai-summary">Sažetak AI asistenta</label>
+                    <div id="ai-summary" class="ai-summary">Niste koristili asistenta na početnoj stranici.</div>
+                </div>
+                <button type="submit" class="btn">Pošalji poruku</button>
+            </form>
+        </div>
+    </section>
     <!-- Contact details section -->
     <section class="section support-contact" id="support-contact">
         <div class="container">
