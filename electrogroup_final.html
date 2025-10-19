@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrogroup ITS DOO</title>
+    <style>
+        /* Color variables for themes */
+        :root {
+            --bg-dark: #020515;
+            --bg-light: #f4f6fa;
+            --text-dark: #dfe9ff;
+            --text-light: #2d3d72;
+            --accent-dark: #8ab4f8;
+            --accent-light: #3f5498;
+            --subtext-dark: #cdd9f1;
+            --subtext-light: #445683;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            transition: background 0.5s, color 0.5s;
+        }
+        body.light {
+            background: var(--bg-light);
+            color: var(--text-light);
+        }
+        /* Preloader with logo placeholder */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            z-index: 9999;
+            animation: fadeOutPreloader 0.8s ease-out 3s forwards;
+        }
+        .logo-placeholder {
+            width: 200px;
+            height: 200px;
+            border: 2px dashed var(--accent-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2vw;
+            color: var(--accent-dark);
+            opacity: 0;
+            animation: fadeInPlaceholder 3s forwards;
+        }
+        /* Actual logo image for the preloader */
+        .logo-img {
+            width: 200px;
+            height: auto;
+            opacity: 0;
+            animation: fadeInPlaceholder 3s forwards;
+        }
+        @keyframes fadeInPlaceholder {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes fadeOutPreloader {
+            to { opacity: 0; visibility: hidden; }
+        }
+        /* Language and theme controls */
+        .controls {
+            position: fixed;
+            top: 1vh;
+            right: 1vw;
+            display: flex;
+            gap: 1vw;
+            z-index: 10000;
+        }
+        .controls select, .controls button {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 5px;
+            padding: 0.5vh 0.8vw;
+            color: var(--text-dark);
+            cursor: pointer;
+            font-size: 0.8rem;
+            backdrop-filter: blur(4px);
+            transition: background 0.3s, border 0.3s, color 0.3s;
+        }
+        body.light .controls select, body.light .controls button {
+            background: rgba(0,0,0,0.05);
+            border-color: rgba(0,0,0,0.3);
+            color: var(--text-light);
+        }
+        /* Hero section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #0d1e40 0%, #020515 100%);
+            overflow: hidden;
+            color: var(--accent-dark);
+            transition: background 0.5s;
+        }
+        body.light .hero {
+            background: radial-gradient(circle at center, #ffffff 0%, #e9ebf1 100%);
+            color: var(--accent-light);
+        }
+        .hero h1 {
+            font-size: 7vw;
+            letter-spacing: 0.4vw;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 1vh;
+            opacity: 0;
+            transition: opacity 0.5s ease-in;
+        }
+        .hero h2 {
+            font-size: 2vw;
+            letter-spacing: 0.3vw;
+            color: var(--subtext-dark);
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+        body.light .hero h2 {
+            color: var(--subtext-light);
+        }
+        /* Lightning effect */
+        .lightning {
+            position: absolute;
+            top: -200px;
+            left: 50%;
+            width: 2px;
+            height: 200px;
+            background: var(--subtext-dark);
+            opacity: 0.8;
+            transform: translateX(-50%);
+            animation: strikeAnimation 5s infinite;
+        }
+        @keyframes strikeAnimation {
+            0% { top: -200px; opacity: 0; }
+            5% { top: 30%; opacity: 1; }
+            6% { top: 30%; opacity: 0; }
+            100% { top: -200px; opacity: 0; }
+        }
+        /* Slideshow */
+        .slideshow {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+        .slideshow img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3vh;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 1vw;
+            color: var(--subtext-dark);
+            transition: color 0.5s;
+        }
+        body.light .scroll-indicator {
+            color: var(--subtext-light);
+        }
+        .scroll-indicator .arrow {
+            width: 1vw;
+            height: 1vw;
+            border: solid var(--subtext-dark);
+            border-width: 0 0.15vw 0.15vw 0;
+            transform: rotate(45deg);
+            animation: arrowMove 2s infinite;
+            margin-bottom: 0.3vw;
+            transition: border-color 0.5s;
+        }
+        body.light .scroll-indicator .arrow {
+            border-color: var(--subtext-light);
+        }
+        @keyframes arrowMove {
+            0% { transform: rotate(45deg) translate(0, 0); }
+            50% { transform: rotate(45deg) translate(-0.3vw, 0.3vw); }
+            100% { transform: rotate(45deg) translate(0, 0); }
+        }
+        /* Section styling */
+        section {
+            min-height: 100vh;
+            padding: 10vh 8vw;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        section h3 {
+            font-size: 2.5vw;
+            margin-bottom: 3vh;
+            color: var(--accent-dark);
+            transition: color 0.5s;
+        }
+        body.light section h3 {
+            color: var(--accent-light);
+        }
+        section p {
+            font-size: 1.2vw;
+            line-height: 1.6;
+            margin-bottom: 2vh;
+            color: var(--subtext-dark);
+            transition: color 0.5s;
+        }
+        body.light section p {
+            color: var(--subtext-light);
+        }
+        /* Layout for text and images within a section */
+        .section-inner {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 2vw;
+        }
+        .section-inner .text {
+            flex: 1 1 50%;
+            min-width: 280px;
+        }
+        .section-inner .images {
+            flex: 1 1 40%;
+            min-width: 240px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1vw;
+        }
+        .section-inner .images img {
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        /* Zoom effect on hover for images */
+        .section-inner .images img:hover {
+            transform: translateY(0) scale(1.05);
+            /* Smooth scaling during hover */
+            transition: transform 0.3s ease;
+        }
+        section.visible .images img {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 12vw; }
+            .hero h2 { font-size: 5vw; }
+            section h3 { font-size: 6vw; }
+            section p { font-size: 3.5vw; }
+            .controls select, .controls button { font-size: 2vw; padding: 0.5vh 1vw; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Controls for language and theme -->
+    <div class="controls">
+        <select id="languageSelect">
+            <option value="sr">SR</option>
+            <option value="en">EN</option>
+        </select>
+        <button id="themeToggle" title="Toggle theme">☀</button>
+    </div>
+    <!-- Preloader with company logo -->
+    <div class="preloader">
+        <!-- Replace this img src with the actual logo file when available -->
+        <img src="img/logo.png" alt="Electrogroup logo" class="logo-img" />
+    </div>
+    <!-- Hero area -->
+    <div class="hero">
+        <div class="slideshow">
+            <img src="img/IMG_0323.jpeg" alt="Trafo station">
+            <img src="img/IMG_0327.jpeg" alt="Transformer detail">
+            <img src="img/IMG_0329.jpeg" alt="Transformer overview">
+            <img src="img/IMG_0325.jpeg" alt="Installation works">
+            <img src="img/IMG_0326.jpeg" alt="Cabling">
+            <img src="img/IMG_0331.jpeg" alt="Electrical works">
+            <img src="img/IMG_0332.jpeg" alt="Modern equipment">
+            <img src="img/IMG_0317.jpeg" alt="Solar panels">
+            <img src="img/IMG_0318.jpeg" alt="Battery storage">
+            <img src="img/IMG_0319.jpeg" alt="Smart metering">
+            <img src="img/IMG_0320.jpeg" alt="Energy management">
+            <img src="img/IMG_0321.jpeg" alt="Automation system">
+            <img src="img/IMG_0322.jpeg" alt="Green energy">
+        </div>
+        <div class="lightning"></div>
+        <h1 id="mainTitle">ELECTROGROUP</h1>
+        <h2 id="tagline">ITS DOO</h2>
+        <div class="scroll-indicator">
+            <div class="arrow"></div>
+            <span id="scrollText">Scroll to explore</span>
+        </div>
+    </div>
+    <!-- Sections with text and images -->
+    <section id="trafoSection">
+        <h3 id="trafoTitle">Trafo stanice &amp; energetski transformatori</h3>
+        <div class="section-inner">
+            <div class="text">
+                <p id="trafoText">Naša kompanija je specijalizovana za projektovanje i izgradnju trafo stanica koje napajaju gradove, fabrike i industrijske zone. Sa savremenom tehnologijom, pažljivo biramo i montiramo transformatore kako bi obezbedili konstantan i pouzdan prenos električne energije. Kroz godine iskustva razvili smo jedinstven pristup koji kombinuje stručnost inženjera i kreativne ideje dizajnera. Transformatori koje instaliramo imaju visoku efikasnost, minimalne gubitke i koriste ekološki prihvatljiva izolaciona ulja. U saradnji sa našim partnerima, implementirali smo napredne sisteme za daljinsko nadgledanje i upravljanje trafostanicama. Svaki projekat prilagođavamo specifičnim zahtevima investitora, uz poštovanje najviših standarda bezbednosti. Posedujemo sopstveni tim montažera, mašinski park i laboratoriju za ispitivanje opreme. Nudimo kompletnu uslugu od idejnog rešenja, preko izvođenja radova, do puštanja trafo stanice u rad. Naše reference obuhvataju gradske distributivne centre, industrijska postrojenja i specijalne objekte u energetskom sektoru. Zahvaljujući predanom radu, stvorili smo pouzdan brend koji klijenti prepoznaju i kome veruju.</p>
+            </div>
+            <div class="images">
+                <img src="img/IMG_0323.jpeg" alt="Trafo station detail">
+                <img src="img/IMG_0327.jpeg" alt="Transformer detail 2">
+                <img src="img/IMG_0329.jpeg" alt="Transformer overview 2">
+            </div>
+        </div>
+    </section>
+    <section id="radoviSection">
+        <h3 id="radoviTitle">Elektroinstalacioni radovi</h3>
+        <div class="section-inner">
+            <div class="text">
+                <p id="radoviText">Pored velikih trafo stanica, naš tim svakodnevno izvodi elektroinstalacione radove na različitim objektима. Od osnovnih kućnih instalacija, preko stambenih zgrada, do složenih industrijskih sistema, pokrivamo čitav spektar usluga. Naši električari imaju certifikate za rad na visokonaponskim i niskonaponskim sistemima. Pažljivo projektujemo raspored kablova kako bismo smanjili elektromagnetne interferencije i energetske gubitke. Koristimo najkvalitetnije materijale i komponente renomiranih proizvođača. Svaka instalacija prolazi rigorozne testove i merenja pre nego što je predate investitoru na upotrebu. Posebnu pažnju posvećujemo implementaciji zaštitnih sistema, uzemljenja i gromobrana. Naši projekti obuhvataju i integraciju pametnih rešenja i automatizovanih sistema upravljanja. Kada su u pitanju adaptacije i renoviranja, pratimo najnovije trendove u energetskoj efikasnosti. Verujemo da je bezbednost na prvom mestu, zato svaki radnik prolazi kontinuiranu obuku i edukaciju.</p>
+            </div>
+            <div class="images">
+                <img src="img/IMG_0325.jpeg" alt="Installation works 1">
+                <img src="img/IMG_0326.jpeg" alt="Cabling works">
+                <img src="img/IMG_0331.jpeg" alt="Electrical works 2">
+            </div>
+        </div>
+    </section>
+    <section id="uslugeSection">
+        <h3 id="uslugeTitle">Savremene elektro usluge</h3>
+        <div class="section-inner">
+            <div class="text">
+                <p id="uslugeText">Osim klasičnih radova, razvijamo i savremene, održive elektro usluge. Imamo tim stručnjaka za projektovanje solarnih postrojenja i spajanje na mrežu. Kroz saradnju sa globalnim liderima, implementiramo rešenja za skladištenje energije pomoću baterijskih sistema. Naši projekti uključuju ugradnju punjača za električna vozila, pametnih brojila i sistem za upravljanje potrošnjom. Upravljamo projektima integracije obnovljivih izvora energije u postojeću infrastrukturu. Nudimo konsultantske usluge u vezi sa energetski efikasnim rešenjima i optimizacijom potrošnje. Izvodimo i sistemsku integraciju automatike, PLC programiranja i SCADA sistema. Naša rešenja se lako skaliraju i nadograđuju u zavisnosti od potreba klijenata. Kroz inovacije i stalno usavršavanje, pratimo trendove pametnih gradova i industrije 4.0. Naš cilj je da klijentima pružimo rešenja budućnosti koja donose stabilnost i smanjenje troškova.</p>
+            </div>
+            <div class="images">
+                <img src="img/IMG_0332.jpeg" alt="Modern equipment 2">
+                <img src="img/IMG_0317.jpeg" alt="Solar panels 2">
+                <img src="img/IMG_0318.jpeg" alt="Battery storage 2">
+            </div>
+        </div>
+    </section>
+    <section id="vizijaSection">
+        <h3 id="vizijaTitle">Vizija i misija</h3>
+        <div class="section-inner">
+            <div class="text">
+                <p id="vizijaText">Electrogroup ITS DOO je posvećen unapređenju energetskog sektora u regionu. Verujemo da električna energija predstavlja osnovu razvoja svakog društva. Naša vizija je da budemo lider u integraciji modernih rešenja koja čuvaju životnu sredinu. Misija nam je da kroz inovacije i kvalitetan rad doprinesemo boljem sutra. Podstičemo kreativnost i podržavamo razvoj mladih talenata u struci. Svaki projekat posmatramo kao priliku da ostavimo pozitivan trag u zajednici. Radimo transparentno, poštujući sve propise i etičke kodekse. Svojim klijentima pružamo potpuni paket usluga, od ideje do realizacije. Kroz partnerstva i saradnju širimo svoje znanje i iskustvo. Naša snaga je u našim ljudима, koji sa strašću grade bolji energetski sistem.</p>
+            </div>
+            <div class="images">
+                <img src="img/IMG_0319.jpeg" alt="Smart metering 2">
+                <img src="img/IMG_0320.jpeg" alt="Energy management 2">
+                <img src="img/IMG_0321.jpeg" alt="Automation system 2">
+                <img src="img/IMG_0322.jpeg" alt="Green energy 2">
+            </div>
+        </div>
+    </section>
+    <!-- Contact section with company details -->
+    <section id="contactSection">
+        <h3 id="contactTitle">Kontakt</h3>
+        <div class="section-inner">
+            <div class="text">
+                <p id="contactDesc">Za dodatne informacije možete nas kontaktirati putem:</p>
+                <ul style="list-style-type:none; padding-left:0; font-size: 1.2vw; line-height:1.8;">
+                    <li id="addressLine"><strong>Adresa:</strong> Kosovska 48, 25101 Sombor, Srbija</li>
+                    <li id="phoneLine"><strong>Telefon:</strong> 0631085618</li>
+                    <li id="emailLine"><strong>E-mail:</strong> <a href="mailto:office@electrogroup.rs">office@electrogroup.rs</a></li>
+                    <li id="pibLine"><strong>PIB:</strong> 112882985</li>
+                    <li id="mbLine"><strong>MB:</strong> 21760072</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script>
+        // Translations for English and Serbian
+        const translations = {
+            sr: {
+                trafoTitle: "Trafo stanice & energetski transformatori",
+                trafoText: "Naša kompanija je specijalizovana za projektovanje i izgradnju trafo stanica koje napajaju gradove, fabrike i industrijske zone. Sa savremenom tehnologijom, pažljivo biramo i montiramo transformatore kako bi obezbedili konstantan i pouzdan prenos električne energije. Kroz godine iskustva razvili smo jedinstven pristup koji kombinuje stručnost inženjera i kreativne ideje dizajnera. Transformatori koje instaliramo imaju visoku efikasnost, minimalne gubitke i koriste ekološki prihvatljiva izolaciona ulja. U saradnji sa našim partnerima, implementirali smo napredne sisteme za daljinsko nadgledanje i upravljanje trafostanicama. Svaki projekat prilagođavamo specifičnim zahtevima investitora, uz poštovanje najviših standarda bezbednosti. Posedujemo sopstveni tim montažera, mašinski park i laboratoriju za ispitivanje opreme. Nudimo kompletnu uslugu od idejnog rešenja, preko izvođenja radova, do puštanja trafo stanice u rad. Naše reference obuhvataju gradske distributivne centre, industrijska postrojenja i specijalne objekte u energetskom sektoru. Zahvaljujući predanom radu, stvorili smo pouzdan brend koji klijenti prepoznaju i kome veruju.",
+                radoviTitle: "Elektroinstalacioni radovi",
+                radoviText: "Pored velikih trafo stanica, naš tim svakodnevno izvodi elektroinstalacione radove na različitim objektима. Od osnovnih kućnih instalacija, preko stambenih zgrada, do složenih industrijskih sistema, pokrivamo čitav spektar usluga. Naši električari imaju certifikate za rad na visokonaponskim i niskonaponskim sistemima. Pažljivo projektujemo raspored kablova kako bismo smanjili elektromagnetne interferencije i energetske gubitke. Koristimo najkvalitetnije materijale i komponente renomiranih proizvođača. Svaka instalacija prolazi rigorozne testove i merenja pre nego što je predate investitoru na upotrebu. Posebnu pažnju posvećujemo implementaciji zaštitnih sistema, uzemljenja i gromobrana. Naši projekti obuhvataju i integraciju pametnih rešenja i automatizovanih sistema upravljanja. Kada su u pitanju adaptacije i renoviranja, pratimo najnovije trendove u energetskoj efikasnosti. Verujemo da je bezbednost na prvom mestu, zato svaki radnik prolazi kontinuiranu obuku i edukaciju.",
+                uslugeTitle: "Savremene elektro usluge",
+                uslugeText: "Osim klasičnih radova, razvijamo i savremene, održive elektro usluge. Imamo tim stručnjaka za projektovanje solarnih postrojenja i spajanje na mrežu. Kroz saradnju sa globalnim liderima, implementiramo rešenja za skladištenje energije pomoću baterijskih sistema. Naši projekti uključuju ugradnju punjača za električna vozila, pametnih brojila i sistem za upravljanje potrošnjom. Upravljamo projektima integracije obnovljivih izvora energije u postojeću infrastrukturu. Nudimo konsultantske usluge u vezi sa energetski efikasnim rešenjima i optimizacijom potrošnje. Izvodimo i sistemsku integraciju automatike, PLC programiranja i SCADA sistema. Naša rešenja se lako skaliraju i nadograđuju u zavisnosti od potreba klijenata. Kroz inovacije i stalno usavršavanje, pratimo trendove pametnih gradova i industrije 4.0. Naš cilj je da klijentima pružimo rešenja budućnosti koja donose stabilnost i smanjenje troškova.",
+                vizijaTitle: "Vizija i misija",
+                vizijaText: "Electrogroup ITS DOO je posvećen unapređenju energetskog sektora u regionu. Verujemo da električna energija predstavlja osnovu razvoja svakog društva. Naša vizija je da budemo lider u integraciji modernih rešenja koja čuvaju životnu sredinu. Misija nam je da kroz inovacije i kvalitetan rad doprinesemo boljem sutra. Podstičemo kreativnost i podržavamo razvoj mladih talenata u struci. Svaki projekat posmatramo kao priliku da ostavimo pozitivan trag u zajednici. Radimo transparentno, poštujući sve propise i etičke kodekse. Svojim klijentima pružamo potpuni paket usluga, od ideje do realizacije. Kroz partnerstva i saradnju širimo svoje znanje i iskustvo. Naša snaga je u našim ljudима, koji sa strašću grade bolji energetski sistem."
+                ,contactTitle: "Kontakt",
+                contactDesc: "Za dodatne informacije možete nas kontaktirati putem:",
+                addressLine: "<strong>Adresa:</strong> Kosovska 48, 25101 Sombor, Srbija",
+                phoneLine: "<strong>Telefon:</strong> 0631085618",
+                emailLine: "<strong>E-mail:</strong> <a href=\"mailto:office@electrogroup.rs\">office@electrogroup.rs</a>",
+                pibLine: "<strong>PIB:</strong> 112882985",
+                mbLine: "<strong>MB:</strong> 21760072"
+            },
+            en: {
+                trafoTitle: "Transformer stations & energy transformers",
+                trafoText: "In our company, we specialise in designing and building transformer stations that power cities, factories and industrial zones. With cutting-edge technology, we carefully select and install transformers to ensure constant and reliable electricity transmission. Over years of experience we have developed a unique approach that combines engineering expertise with creative design ideas. The transformers we install are highly efficient, have minimal losses and use environmentally friendly insulation oils. Working with our partners, we implement advanced remote monitoring and control systems for substations. Every project is tailored to the specific requirements of investors, while respecting the highest safety standards. We have our own team of assemblers, machinery fleet and a laboratory for testing equipment. We offer a complete service from concept design, through construction works, to commissioning the substation. Our references include urban distribution centres, industrial plants and special facilities in the energy sector. Thanks to dedicated work, we have created a reliable brand that clients recognise and trust.",
+                radoviTitle: "Electrical installation works",
+                radoviText: "In addition to large transformer stations, our team performs electrical installation works on a daily basis on a variety of structures. From basic home installations, through apartment buildings, to complex industrial systems, we cover the entire spectrum of services. Our electricians are certified for working on high and low voltage systems. We carefully design the layout of cables to reduce electromagnetic interference and energy losses. We use the highest quality materials and components from renowned manufacturers. Every installation undergoes rigorous testing and measurement before it is handed over to the investor for use. We pay special attention to the implementation of protective systems, grounding and lightning rods. Our projects include integration of smart solutions and automated control systems. When it comes to adaptations and renovations, we follow the latest trends in energy efficiency. We believe that safety comes first, which is why every worker undergoes continuous training and education.",
+                uslugeTitle: "Modern electrical services",
+                uslugeText: "In addition to classic works, we develop modern, sustainable electrical services. We have a team of experts for designing solar plants and connecting them to the grid. Through cooperation with global leaders, we implement energy storage solutions using battery systems. Our projects include the installation of chargers for electric vehicles, smart metering and consumption management systems. We manage projects of integrating renewable energy sources into existing infrastructure. We offer consulting services regarding energy-efficient solutions and consumption optimisation. We also perform systems integration for automation, PLC programming and SCADA systems. Our solutions are easily scalable and upgradeable depending on clients’ needs. Through innovation and continuous improvement, we follow trends in smart cities and Industry 4.0. Our goal is to provide clients with future-proof solutions that bring stability and cost reduction.",
+                vizijaTitle: "Vision and mission",
+                vizijaText: "Electrogroup ITS DOO is committed to improving the energy sector in the region. We believe that electric energy represents the foundation of development for every society. Our vision is to be a leader in integrating modern solutions that preserve the environment. Our mission is to contribute to a better tomorrow through innovation and quality work. We encourage creativity and support the development of young talents in the profession. We view every project as an opportunity to leave a positive mark on the community. We work transparently, respecting all regulations and ethical codes. We provide our clients with a complete package of services, from idea to realisation. Through partnerships and cooperation we expand our knowledge and experience. Our strength lies in our people, who passionately build a better energy system.",
+                contactTitle: "Contact",
+                contactDesc: "For more information you can contact us via:",
+                addressLine: "<strong>Address:</strong> Kosovska 48, 25101 Sombor, Serbia",
+                phoneLine: "<strong>Phone:</strong> 0631085618",
+                emailLine: "<strong>E-mail:</strong> <a href=\"mailto:office@electrogroup.rs\">office@electrogroup.rs</a>",
+                pibLine: "<strong>PIB:</strong> 112882985",
+                mbLine: "<strong>MB:</strong> 21760072"
+            }
+        };
+        // Function to update language
+        function updateLanguage(lang) {
+            const t = translations[lang];
+            document.getElementById('trafoTitle').innerText = t.trafoTitle;
+            document.getElementById('trafoText').innerText = t.trafoText;
+            document.getElementById('radoviTitle').innerText = t.radoviTitle;
+            document.getElementById('radoviText').innerText = t.radoviText;
+            document.getElementById('uslugeTitle').innerText = t.uslugeTitle;
+            document.getElementById('uslugeText').innerText = t.uslugeText;
+            document.getElementById('vizijaTitle').innerText = t.vizijaTitle;
+            document.getElementById('vizijaText').innerText = t.vizijaText;
+        // Update contact section based on language
+        if (document.getElementById('contactTitle')) {
+            document.getElementById('contactTitle').innerText = t.contactTitle;
+            document.getElementById('contactDesc').innerText = t.contactDesc;
+            document.getElementById('addressLine').innerHTML = t.addressLine;
+            document.getElementById('phoneLine').innerHTML = t.phoneLine;
+            document.getElementById('emailLine').innerHTML = t.emailLine;
+            document.getElementById('pibLine').innerHTML = t.pibLine;
+            document.getElementById('mbLine').innerHTML = t.mbLine;
+        }
+        // Update scroll indicator text if needed
+        document.getElementById('scrollText').innerText = lang === 'en' ? 'Scroll to explore' : 'Skroluj za više';
+        }
+        // Theme toggle
+        function toggleTheme() {
+            const isLight = document.body.classList.toggle('light');
+            localStorage.setItem('theme', isLight ? 'light' : 'dark');
+            themeToggle.innerText = isLight ? '🌙' : '☀';
+        }
+        window.addEventListener('load', () => {
+            // Preload typed effect
+            const titleElem = document.getElementById('mainTitle');
+            const taglineElem = document.getElementById('tagline');
+            const text = titleElem.textContent.trim();
+            titleElem.textContent = '';
+            let idx = 0;
+            function typeLetter() {
+                if (idx < text.length) {
+                    titleElem.textContent += text.charAt(idx);
+                    idx++;
+                    setTimeout(typeLetter, 150);
+                } else {
+                    taglineElem.style.opacity = '1';
+                }
+            }
+            setTimeout(() => {
+                titleElem.style.opacity = '1';
+                typeLetter();
+            }, 3000);
+            // Slideshow
+            const imgs = document.querySelectorAll('.slideshow img');
+            let current = 0;
+            function showSlide(i) {
+                imgs.forEach((img, idx) => {
+                    img.style.opacity = (idx === i) ? '1' : '0';
+                });
+            }
+            function nextSlide() {
+                current = (current + 1) % imgs.length;
+                showSlide(current);
+            }
+            setTimeout(() => {
+                showSlide(0);
+                setInterval(nextSlide, 5000);
+            }, 3000);
+            // Scroll reveal
+            const sections = document.querySelectorAll('section');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            sections.forEach(sec => observer.observe(sec));
+            // Initialize language from storage
+            const languageSelect = document.getElementById('languageSelect');
+            const savedLang = localStorage.getItem('language') || 'sr';
+            languageSelect.value = savedLang;
+            updateLanguage(savedLang);
+            languageSelect.addEventListener('change', () => {
+                const lang = languageSelect.value;
+                updateLanguage(lang);
+                localStorage.setItem('language', lang);
+            });
+            // Initialize theme from storage
+            const themeToggle = document.getElementById('themeToggle');
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            if (savedTheme === 'light') {
+                document.body.classList.add('light');
+                themeToggle.innerText = '🌙';
+            } else {
+                themeToggle.innerText = '☀';
+            }
+            themeToggle.addEventListener('click', toggleTheme);
+        });
+    </script>
+</body>
+</html>
