@@ -1,0 +1,484 @@
+/*
+ * Main stylesheet for the Electrogroup ITS website.
+ *
+ * Defines the overall look and feel of the site including typography,
+ * layout, color scheme and animations. The design focuses on clean
+ * presentation with clear hierarchy and smooth transitions as the user
+ * scrolls through the page. Fade‑in and parallax‑like effects are
+ * implemented purely with CSS and controlled via JavaScript.
+ */
+
+/* CSS variables for easy theming */
+:root {
+    --primary: #0a3d62;
+    --accent: #007bff;
+    --bg: #f5f7fa;
+    --text-dark: #333;
+    --text-light: #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+    background: var(--bg);
+    line-height: 1.6;
+}
+
+/* Container centers content and constrains max width */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header styling */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(10, 61, 98, 0.6);
+    backdrop-filter: blur(5px);
+    transition: background 0.3s;
+}
+
+header.scrolled {
+    background: rgba(10, 61, 98, 0.9);
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+header .logo {
+    font-weight: 700;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+header nav a {
+    color: var(--text-light);
+    margin-left: 1.5rem;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+header nav a:hover {
+    color: var(--accent);
+}
+
+header nav .btn {
+    background: var(--accent);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    margin-left: 2rem;
+    color: var(--text-light);
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+header nav .btn:hover {
+    background: darken(var(--accent), 10%);
+}
+
+/* Hero section styling */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-light);
+    overflow: hidden;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+    /* Fade in and out to create a smooth loop similar to modern promotional sites */
+    animation: fadeVideo 12s ease-in-out infinite;
+}
+
+/* Dark gradient overlay to ensure contrast for text */
+.hero .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8));
+    z-index: -1;
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 1rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.2s forwards 0.4s;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
+    margin: 0.4rem;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    background: var(--accent);
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.hero-buttons .btn:hover {
+    background: #0062cc;
+}
+
+.hero-buttons .btn.outline {
+    background: transparent;
+    border: 2px solid var(--accent);
+    color: var(--accent);
+}
+
+.hero-buttons .btn.outline:hover {
+    background: var(--accent);
+    color: var(--text-light);
+}
+
+/* Scroll indicator at bottom of hero */
+.scroll-down {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-light);
+    font-size: 2rem;
+    animation: bounce 2s infinite;
+}
+
+/* Style for the arrow character inside the scroll indicator */
+.scroll-down .arrow {
+    font-size: 2rem;
+    display: inline-block;
+    line-height: 1;
+}
+
+/* Generic section styling */
+.section {
+    padding: 5rem 0 4rem;
+    background: var(--bg);
+}
+
+.section:nth-of-type(even) {
+    background: #ffffff;
+}
+
+.section h2 {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 2.5rem;
+    font-size: 2rem;
+}
+
+/* Services cards grid */
+.services .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.card.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Icon wrapper is no longer used for service cards since we switched to illustrative images. */
+
+/* Reason icons use emojis; style them similarly to the old icons */
+.reason-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.8rem;
+    color: var(--accent);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.6rem;
+    color: var(--primary);
+}
+
+.card p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Gallery grid styling */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.2rem;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.gallery-grid.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gallery-grid img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.gallery-grid img:hover {
+    transform: scale(1.05);
+}
+
+/* References styling */
+.references .reference-list {
+    list-style: none;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.references .reference-list.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reference-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.reference-list li i {
+    color: var(--accent);
+    margin-right: 0.5rem;
+}
+
+/* Since we replaced reference icons with a check mark character, adjust spacing */
+.reference-list li {
+    padding-left: 1.3rem;
+    position: relative;
+}
+.reference-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* Why us section styling */
+.reasons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.reasons.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reason {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.reason i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 0.8rem;
+}
+
+.reason h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+}
+
+.reason p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.reason:hover {
+    transform: translateY(-5px);
+}
+
+/* Contact form styling */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-form .form-group input,
+.contact-form .form-group textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+.contact-form .btn {
+    align-self: flex-start;
+    background: var(--accent);
+    color: var(--text-light);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.contact-form .btn:hover {
+    background: #0062cc;
+}
+
+/* Footer styling */
+footer {
+    background: var(--primary);
+    color: var(--text-light);
+    padding: 1.5rem 0;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+/* Keyframe animations */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeVideo {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
+
+/* Responsive typography adjustments */
+@media (min-width: 768px) {
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+}
