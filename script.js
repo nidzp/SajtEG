@@ -26,24 +26,66 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add / remove 'scrolled' class to header when user scrolls
     const header = document.querySelector('header');
     const heroSection = document.getElementById('hero');
-    const heroContent = heroSection.querySelector('.hero-content');
+    const heroContent = heroSection ? heroSection.querySelector('.hero-content') : null;
 
     const onScroll = () => {
-        // Toggle header background
-        if (window.scrollY > 80) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        if (header) {
+            if (window.scrollY > 80) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         }
-        // Parallax fade effect on hero content as the user scrolls away from the hero
-        const heroHeight = heroSection.offsetHeight;
-        const scrollY = Math.min(window.scrollY, heroHeight);
-        const ratio = scrollY / heroHeight;
-        // Reduce opacity and translate downwards
-        heroContent.style.opacity = 1 - ratio;
-        heroContent.style.transform = `translateY(${ratio * 50}px)`;
+        if (heroSection && heroContent) {
+            if (window.innerWidth > 768) {
+                const heroHeight = heroSection.offsetHeight || 1;
+                const scrollY = Math.min(window.scrollY, heroHeight);
+                const ratio = scrollY / heroHeight;
+                heroContent.style.opacity = `${1 - ratio}`;
+                heroContent.style.transform = `translateY(${ratio * 50}px)`;
+            } else {
+                heroContent.style.opacity = '1';
+                heroContent.style.transform = 'translateY(0)';
+            }
+        }
     };
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile navigation toggle
+    const siteNav = document.getElementById('site-nav');
+    const navToggle = document.querySelector('.nav-toggle');
+    if (siteNav && navToggle) {
+        const closeNav = () => {
+            siteNav.classList.remove('open');
+            document.body.classList.remove('nav-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+        };
+        navToggle.addEventListener('click', () => {
+            const isOpen = !siteNav.classList.contains('open');
+            if (isOpen) {
+                siteNav.classList.add('open');
+                document.body.classList.add('nav-open');
+            } else {
+                siteNav.classList.remove('open');
+                document.body.classList.remove('nav-open');
+            }
+            navToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+        siteNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => closeNav());
+        });
+        document.addEventListener('keyup', (evt) => {
+            if (evt.key === 'Escape') {
+                closeNav();
+            }
+        });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 960) {
+                closeNav();
+            }
+        });
+    }
 
     // IntersectionObserver to reveal elements when they are near the viewport
     const observerOptions = {
@@ -65,17 +107,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const gallery = document.querySelector('.gallery-grid');
     if (gallery) {
         observer.observe(gallery);
-        // Append generated SVG illustrations to the gallery (transformer station, wall unit, cable joint)
-        const generated = [
-            { src: 'assets/generated/trafo-station.svg', alt: 'Ilustracija trafostanice' },
-            { src: 'assets/generated/wall-transformer.svg', alt: 'Zidna trafostanica' },
-            { src: 'assets/generated/cable-joint.svg', alt: 'Spojnica kablovskog voda' }
-        ];
-        generated.forEach(({src,alt}) => {
-            const img = document.createElement('img');
-            img.src = src; img.alt = alt; img.loading = 'lazy';
-            gallery.appendChild(img);
-        });
+    }
+
+    // Sequentially reveal transformer cards once the section enters the viewport
+    const trafoGrid = document.querySelector('.trafo-grid');
+    if (trafoGrid) {
+        const trafoCards = trafoGrid.querySelectorAll('.trafo-card');
+        const trafoObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    trafoCards.forEach((card, idx) => {
+                        setTimeout(() => card.classList.add('revealed'), idx * 140);
+                    });
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.35 });
+        trafoObserver.observe(trafoGrid);
     }
 
     /*

@@ -18,10 +18,52 @@ document.addEventListener('DOMContentLoaded', () => {
             preloader.style.display = 'none';
         }, 4000);
     }
+
+    const header = document.querySelector('header');
+    const updateHeader = () => {
+        if (!header) return;
+        if (window.scrollY > 80) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    };
+    window.addEventListener('scroll', updateHeader, { passive: true });
+    updateHeader();
+
+    const siteNav = document.getElementById('site-nav');
+    const navToggle = document.querySelector('.nav-toggle');
+    if (siteNav && navToggle) {
+        const closeNav = () => {
+            siteNav.classList.remove('open');
+            document.body.classList.remove('nav-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+        };
+        navToggle.addEventListener('click', () => {
+            const isOpen = !siteNav.classList.contains('open');
+            siteNav.classList.toggle('open', isOpen);
+            document.body.classList.toggle('nav-open', isOpen);
+            navToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+        siteNav.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeNav);
+        });
+        document.addEventListener('keyup', (evt) => {
+            if (evt.key === 'Escape') {
+                closeNav();
+            }
+        });
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 960) {
+                closeNav();
+            }
+        });
+    }
+
     // Toggle display of subquestion groups when category headings are clicked
     document.querySelectorAll('.support-category').forEach(category => {
-        const header = category.querySelector('h2');
-        header.addEventListener('click', () => {
+        const sectionHeader = category.querySelector('h2');
+        sectionHeader.addEventListener('click', () => {
             category.classList.toggle('open');
         });
         // Toggle individual answers when subquestions are clicked

@@ -21,7 +21,11 @@
     <header>
         <div class="container">
             <a href="index.html#hero" class="logo"><img src="assets/logo.png" alt="ElectroGroup logo"></a>
-            <nav>
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+                <span class="nav-toggle-icon"></span>
+                <span class="sr-only">Meni</span>
+            </button>
+            <nav id="site-nav" class="site-nav">
                 <a href="index.html#about">Ko smo mi</a>
                 <a href="index.html#focus">Fokus</a>
                 <a href="index.html#team">Tim</a>
@@ -345,9 +349,7 @@
                             <iframe title="Mapa sedista Electrogroup ITS" src="https://www.openstreetmap.org/export/embed.html?bbox=19.099%2C45.744%2C19.113%2C45.749&amp;layer=mapnik&amp;marker=45.7465%2C19.106" loading="lazy"></iframe>
                             <a class="map-link" href="https://www.openstreetmap.org/?mlat=45.7465&amp;mlon=19.106#map=17/45.7465/19.106" target="_blank" rel="noopener">Pogledaj mapu u novom prozoru</a>
                         </div>
-                    </div><form action="https://formsubmit.co/nikola.djokic10@gmailcom" method="POST" >
-
-
+                    </div>
                     <form class="contact-form" action="https://formsubmit.co/office@electrogroup.rs" method="POST">
                         <h3>Onlajn upit</h3>
                         <p class="form-intro">Popunite formu kako bismo vas povezali sa odgovornim inzenjerom. Obavezna polja oznacena su sa *.</p>
