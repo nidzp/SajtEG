@@ -44,6 +44,24 @@
   --color-text-light: #d1d6e4;
   --color-surface: #ffffff;
   --color-surface-dark: #15223a;
+  /* Extended palette (more blues + blacks for subtle gradients and glows) */
+  --blue-50:  #e6f2ff;
+  --blue-100: #cce6ff;
+  --blue-200: #b3daff;
+  --blue-300: #80c1ff;
+  --blue-400: #4da9ff;
+  --blue-500: #1e88e5;
+  --blue-600: #0b6ed7;
+  --blue-700: #015dcb;
+  --blue-800: #014aa3;
+  --blue-900: #013873;
+  --blue-neon: #33d1ff;
+  --blue-ice:  #9ad7ff;
+  --black-900: #000000;
+  --black-800: #090f1a;
+  --black-700: #0c1424;
+  --black-600: #0f1a2e;
+  --black-500: #13223c;
   /* Elevation and shadows */
   --shadow-elev1: 0 1px 3px rgba(0, 0, 0, 0.2);
   --shadow-elev2: 0 4px 12px rgba(0, 0, 0, 0.15);
@@ -791,19 +809,28 @@ button {
   transform: none !important;
 }
 
-/* Logo lightning effect: cycles between no glow and glow states */
+/* Logo lightning effect: stronger glow with a base soft edge halo */
 @keyframes lightning {
   0%, 92%, 100% {
-    filter: drop-shadow(0 0 0 rgba(11, 94, 215, 0));
+    /* Maintain a subtle halo even when not flashing */
+    filter: drop-shadow(0 0 6px rgba(30, 144, 255, 0.35))
+            drop-shadow(0 0 16px rgba(30, 144, 255, 0.2));
   }
   93% {
-    filter: drop-shadow(0 0 12px rgba(11, 94, 215, 0.9));
+    /* First flash */
+    filter: drop-shadow(0 0 16px rgba(30, 144, 255, 0.95))
+            drop-shadow(0 0 28px rgba(154, 215, 255, 0.8));
   }
   94% {
-    filter: drop-shadow(0 0 22px rgba(11, 94, 215, 1));
+    /* Peak flash with layered aura */
+    filter: drop-shadow(0 0 22px rgba(30, 144, 255, 1))
+            drop-shadow(0 0 42px rgba(154, 215, 255, 0.85))
+            drop-shadow(0 0 64px rgba(51, 209, 255, 0.6));
   }
   95% {
-    filter: drop-shadow(0 0 10px rgba(11, 94, 215, 0.7));
+    /* Decay */
+    filter: drop-shadow(0 0 12px rgba(30, 144, 255, 0.7))
+            drop-shadow(0 0 24px rgba(154, 215, 255, 0.45));
   }
 }
 
