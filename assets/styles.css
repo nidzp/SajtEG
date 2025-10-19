@@ -2,7 +2,17 @@
   --blue:#0b5ed7; --blue-2:#0a4fb4; --ink:#0b1220; --bg:#ffffff; --muted:#5f6b7a;
   --card:#f6f8fb; --ring:rgba(11,94,215,.25); --glow:rgba(11,94,215,.6);
 }
-*{box-sizing:border-box} html,body{margin:0} body{font:16px/1.6 system-ui,Segoe UI,Arial;background:var(--bg);color:#111}
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+}
+body {
+  font: 16px/1.6 system-ui, Segoe UI, Arial;
+  background: var(--bg);
+  color: #111;
+}
 img{max-width:100%;display:block}
 a{color:var(--blue);text-decoration:none}
 .btn{display:inline-flex;gap:.5rem;align-items:center;padding:.7rem 1rem;border-radius:12px;border:1px solid var(--blue-2)}

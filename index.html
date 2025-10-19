@@ -122,9 +122,9 @@
     <section id="gallery" class="section">
       <h3 class="section-title" data-i18n="gallery.title">Galerija</h3>
       <div class="grid gallery">
-        <!-- ubacujemo sve koje si poslao -->
+        <!-- Gallery images -->
         <a class="gitem fade" href="assets/img/IMG_0317.jpg"><img src="assets/img/IMG_0317.jpg" alt="IMG_0317"></a>
-        <a class="gitem fade" href="assets/img/IMG_0318.jpg"><img src="assets/img/IMG_0318.jpg" alt="IMG_0318"></a>
+        <a class="gitem fade" href="assets/img/IMG_0318.jpg"><img src="assets/img/IMG_0318.jpg" alt="Solarni paneli – FNE"></a>
         <a class="gitem fade" href="assets/img/IMG_0319.jpg"><img src="assets/img/IMG_0319.jpg" alt="IMG_0319"></a>
         <a class="gitem fade" href="assets/img/IMG_0320.jpg"><img src="assets/img/IMG_0320.jpg" alt="IMG_0320"></a>
         <a class="gitem fade" href="assets/img/IMG_0321.jpg"><img src="assets/img/IMG_0321.jpg" alt="IMG_0321"></a>
@@ -174,12 +174,13 @@
       <p><strong>Adresa:</strong> Kosovska 48, 25101 Sombor, Srbija<br>
          <strong>Telefon:</strong> +381 63 108 5618<br>
          <strong>E-mail:</strong> <a href="mailto:office@electrogroup.rs">office@electrogroup.rs</a></p>
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('Hvala! Javićemo se ubrzo.');">
+      <form class="contact-form">
         <input type="text" placeholder="Vaše ime" required>
         <input type="email" placeholder="E-mail" required>
         <textarea placeholder="Vaša poruka" rows="4"></textarea>
         <button class="btn primary" type="submit">Pošalji</button>
       </form>
+      <div id="contact-msg" class="contact-msg" style="display:none;">Hvala! Javićemo se ubrzo.</div>
     </div>
     <p class="copy">© <span id="yr"></span> ELECTROGROUP ITS DOO</p>
   </footer>

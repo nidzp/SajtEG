@@ -1,5 +1,5 @@
 // Language + script + dark mode
-const $ = s => document.querySelector(s);
+const qs = s => document.querySelector(s);
 const i18n = {
   sr: {
     "hero.h":"Kompletne elektroinstalacije, solarne elektrane i inženjering",
@@ -51,12 +51,12 @@ const i18n = {
   }
 };
 
-let lang='sr', Cyrillic=false;
+let lang='sr', cyrillic=false;
 const setText=()=>document.querySelectorAll('[data-i18n]').forEach(n=>n.textContent=i18n[lang][n.dataset.i18n]);
-$('#btn-sr').onclick=()=>{lang='sr';setText()};
-$('#btn-en').onclick=()=>{lang='en';setText()};
-$('#btn-script').onclick=()=>{Cyrillic=!Cyrillic; document.documentElement.classList.toggle('cyr',Cyrillic)};
-$('#btn-dark').onclick=()=>document.documentElement.classList.toggle('dark');
+qs('#btn-sr').onclick=()=>{lang='sr';setText()};
+qs('#btn-en').onclick=()=>{lang='en';setText()};
+qs('#btn-script').onclick=()=>{cyrillic=!cyrillic; document.documentElement.classList.toggle('cyr',cyrillic)};
+qs('#btn-dark').onclick=()=>document.documentElement.classList.toggle('dark');
 
 // Scroll fade reveal
 const io=new IntersectionObserver((ents)=>ents.forEach(e=>e.isIntersecting&&e.target.classList.add('reveal')), {threshold:.18});
