@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ELECTROGROUP ITS – Elektroinstalacije & Solarne elektrane</title>
+  <meta name="description" content="Kompletne elektroinstalacije 0,4–20 kV, solarne elektrane, trafostanice, kablovski i zemljani radovi, projektovanje i održavanje. Sombor, Srbija." />
+  <link rel="icon" href="assets/img/logo.png" />
+  <link rel="preload" href="assets/img/hero-spark.jpg" as="image">
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body class="theme-blue">
+  <!-- Top bar -->
+  <header class="site-header">
+    <div class="brand">
+      <img class="logo anim-logo" src="assets/img/logo.png" alt="ELECTROGROUP ITS logo" />
+      <div class="brand-text">
+        <h1 class="anim-electrogroup" aria-label="ELECTROGROUP">ELECTROGROUP</h1>
+        <p class="sub">ITS DOO Sombor</p>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a href="#services">Usluge</a>
+      <a href="#refs">Reference</a>
+      <a href="#why">Zašto mi</a>
+      <a href="#contact" class="btn primary">Pošalji upit</a>
+      <div class="toggles">
+        <button id="btn-sr" class="chip">SR</button>
+        <button id="btn-en" class="chip">EN</button>
+        <button id="btn-script" class="chip">lat/ћир</button>
+        <button id="btn-dark" class="chip" title="Dark mode">☾</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <picture>
+      <source srcset="assets/img/IMG_0318.jpg" media="(max-width: 640px)">
+      <img src="assets/img/hero-spark.jpg" alt="Solarni paneli i elektro stubovi" />
+    </picture>
+    <div class="hero-overlay">
+      <h2 data-i18n="hero.h">Kompletne elektroinstalacije, solarne elektrane i inženjering</h2>
+      <p data-i18n="hero.p">Od ideje do realizacije – „ključ u ruke“ za objekte, industriju i energiju.</p>
+      <div class="cta">
+        <a href="#contact" class="btn primary" data-i18n="cta.quote">Zatraži ponudu</a>
+        <a href="#services" class="btn ghost" data-i18n="cta.more">Pogledaj usluge</a>
+      </div>
+    </div>
+    <a class="scroll-down" href="#services" aria-label="Scroll down">⌄</a>
+  </section>
+
+  <!-- Services -->
+  <main>
+    <section id="services" class="section">
+      <h3 class="section-title" data-i18n="services.title">Usluge</h3>
+      <div class="grid services">
+        <!-- Elektroinstalacije -->
+        <article class="card fade">
+          <img src="assets/img/IMG_0332.jpg" alt="Radovi na elektro stubu 0,4–20 kV" loading="lazy">
+          <h4 data-i18n="s.ei.h">Elektroinstalacije 0,4–20 kV</h4>
+          <p data-i18n="s.ei.p">
+            Projektovanje i izvedba LV/MV sistema: kablovske mreže, razvodni ormani,
+            nadzemni/podzemni vodovi, stubne i tipske TS – kompletna rešenja „ključ u ruke“.
+          </p>
+        </article>
+
+        <!-- Solarne -->
+        <article class="card fade">
+          <img src="assets/img/IMG_0318.jpg" alt="Solarni paneli – FNE" loading="lazy">
+          <h4 data-i18n="s.fne.h">Solarne elektrane (FNE)</h4>
+          <p data-i18n="s.fne.p">
+            Fotonaponski sistemi za domaćinstva, poljoprivredu i industriju: oprema, montaža,
+            puštanje u rad i priključenje na mrežu, uz kompletnu dokumentaciju.
+          </p>
+        </article>
+
+        <!-- Trafostanice / MV -->
+        <article class="card fade">
+          <img src="assets/img/IMG_0326.jpg" alt="Tipska trafostanica" loading="lazy">
+          <h4 data-i18n="s.ts.h">Trafostanice i MV postrojenja</h4>
+          <p data-i18n="s.ts.p">
+            Projektovanje i gradnja TS, MV sklopna postrojenja, zaštitno-upravljački sistemi,
+            integracija novih izvora i ispitivanja za upotrebnu dozvolu.
+          </p>
+        </article>
+
+        <!-- Kablovska kanalizacija / zemljani -->
+        <article class="card fade">
+          <img src="assets/img/IMG_0320.jpg" alt="Iskop rova i polaganje kabla" loading="lazy">
+          <h4 data-i18n="s.kabl.h">Kablovski & zemljani radovi</h4>
+          <p data-i18n="s.kabl.p">
+            Rovovi, polaganje podzemnih kablova, zaštitne cevi, spojnice i kanalizacija – mehanizacija
+            i stručni tim uz poštovanje standarda i rokova.
+          </p>
+        </article>
+
+        <!-- Montaža opreme / integracija -->
+        <article class="card fade">
+          <img src="assets/img/IMG_0327.jpg" alt="Stubni sklop i oprema" loading="lazy">
+          <h4 data-i18n="s.integr.h">Ugradnja opreme & integracija</h4>
+          <p data-i18n="s.integr.p">
+            Razvodni ormari, prekidači, merna oprema, agregati i UPS – kompletna isporuka,
+            ugradnja i integracija u jedinstven sistem.
+          </p>
+        </article>
+
+        <!-- Servis / održavanje -->
+        <article class="card fade">
+          <img src="assets/img/IMG_0329.jpg" alt="Servisni tim na terenu" loading="lazy">
+          <h4 data-i18n="s.odrz.h">Servis, monitoring & održavanje</h4>
+          <p data-i18n="s.odrz.p">
+            Puštanje u rad, monitoring FNE/TS, preventivni pregledi i brze intervencije – ugovori
+            o održavanju za dugotrajan i siguran rad sistema.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="section">
+      <h3 class="section-title" data-i18n="gallery.title">Galerija</h3>
+      <div class="grid gallery">
+        <!-- ubacujemo sve koje si poslao -->
+        <a class="gitem fade" href="assets/img/IMG_0317.jpg"><img src="assets/img/IMG_0317.jpg" alt="IMG_0317"></a>
+        <a class="gitem fade" href="assets/img/IMG_0318.jpg"><img src="assets/img/IMG_0318.jpg" alt="IMG_0318"></a>
+        <a class="gitem fade" href="assets/img/IMG_0319.jpg"><img src="assets/img/IMG_0319.jpg" alt="IMG_0319"></a>
+        <a class="gitem fade" href="assets/img/IMG_0320.jpg"><img src="assets/img/IMG_0320.jpg" alt="IMG_0320"></a>
+        <a class="gitem fade" href="assets/img/IMG_0321.jpg"><img src="assets/img/IMG_0321.jpg" alt="IMG_0321"></a>
+        <a class="gitem fade" href="assets/img/IMG_0322.jpg"><img src="assets/img/IMG_0322.jpg" alt="IMG_0322"></a>
+        <a class="gitem fade" href="assets/img/IMG_0323.jpg"><img src="assets/img/IMG_0323.jpg" alt="IMG_0323"></a>
+        <a class="gitem fade" href="assets/img/IMG_0325.jpg"><img src="assets/img/IMG_0325.jpg" alt="IMG_0325"></a>
+        <a class="gitem fade" href="assets/img/IMG_0326.jpg"><img src="assets/img/IMG_0326.jpg" alt="IMG_0326"></a>
+        <a class="gitem fade" href="assets/img/IMG_0327.jpg"><img src="assets/img/IMG_0327.jpg" alt="IMG_0327"></a>
+        <a class="gitem fade" href="assets/img/IMG_0328.jpg"><img src="assets/img/IMG_0328.jpg" alt="IMG_0328"></a>
+        <a class="gitem fade" href="assets/img/IMG_0329.jpg"><img src="assets/img/IMG_0329.jpg" alt="IMG_0329"></a>
+        <a class="gitem fade" href="assets/img/IMG_0331.jpg"><img src="assets/img/IMG_0331.jpg" alt="IMG_0331"></a>
+        <a class="gitem fade" href="assets/img/IMG_0332.jpg"><img src="assets/img/IMG_0332.jpg" alt="IMG_0332"></a>
+      </div>
+      <!-- lightbox -->
+      <dialog id="lightbox"><img alt=""><button class="close">×</button></dialog>
+    </section>
+
+    <!-- References -->
+    <section id="refs" class="section">
+      <h3 class="section-title" data-i18n="refs.title">Reference</h3>
+      <ul class="ticks fade">
+        <li data-i18n="refs.sivac">Solarni park ~10 MW, Sivac – izvođenje ključnih radova</li>
+        <li data-i18n="refs.svilojevo">Dve FNE ~9,9 MW, Svilojevo – izgradnja i priključenje</li>
+        <li data-i18n="refs.zmajevo">FNE ~159 kW, Zmajevo – projektovanje i montaža</li>
+        <li data-i18n="refs.mvts">Više projekata TS 10/0.4 kV i MV sklopnih postrojenja</li>
+      </ul>
+    </section>
+
+    <!-- Why us -->
+    <section id="why" class="section">
+      <h3 class="section-title" data-i18n="why.title">Zašto izabrati nas</h3>
+      <div class="grid why">
+        <div class="why-item fade"><h4>Kompletna usluga</h4><p>Projektovanje, nabavka opreme, izvođenje i puštanje u rad.</p></div>
+        <div class="why-item fade"><h4>Kvalitet & bezbednost</h4><p>Materijali i rad po najvišim standardima i propisima.</p></div>
+        <div class="why-item fade"><h4>Rokovi</h4><p>Planiranje i koordinacija – isporuka u dogovorenom roku.</p></div>
+        <div class="why-item fade"><h4>Stabilnost</h4><p>A+ bonitet, bez blokada – pouzdan partner dugoročno.</p></div>
+        <div class="why-item fade"><h4>Inovacije</h4><p>Fokus na FNE, energetsku efikasnost i moderna rešenja.</p></div>
+        <div class="why-item fade"><h4>Pristup klijentu</h4><p>Transparentna komunikacija i podrška nakon isporuke.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Contact -->
+  <footer id="contact" class="footer section">
+    <div class="contact fade">
+      <h3 class="section-title" data-i18n="contact.title">Kontakt</h3>
+      <p><strong>Adresa:</strong> Kosovska 48, 25101 Sombor, Srbija<br>
+         <strong>Telefon:</strong> +381 63 108 5618<br>
+         <strong>E-mail:</strong> <a href="mailto:office@electrogroup.rs">office@electrogroup.rs</a></p>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('Hvala! Javićemo se ubrzo.');">
+        <input type="text" placeholder="Vaše ime" required>
+        <input type="email" placeholder="E-mail" required>
+        <textarea placeholder="Vaša poruka" rows="4"></textarea>
+        <button class="btn primary" type="submit">Pošalji</button>
+      </form>
+    </div>
+    <p class="copy">© <span id="yr"></span> ELECTROGROUP ITS DOO</p>
+  </footer>
+
+  <script src="assets/app.js"></script>
+</body>
+</html>

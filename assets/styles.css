@@ -1,0 +1,91 @@
+:root{
+  --blue:#0b5ed7; --blue-2:#0a4fb4; --ink:#0b1220; --bg:#ffffff; --muted:#5f6b7a;
+  --card:#f6f8fb; --ring:rgba(11,94,215,.25); --glow:rgba(11,94,215,.6);
+}
+*{box-sizing:border-box} html,body{margin:0} body{font:16px/1.6 system-ui,Segoe UI,Arial;background:var(--bg);color:#111}
+img{max-width:100%;display:block}
+a{color:var(--blue);text-decoration:none}
+.btn{display:inline-flex;gap:.5rem;align-items:center;padding:.7rem 1rem;border-radius:12px;border:1px solid var(--blue-2)}
+.btn.primary{background:var(--blue);color:#fff;border-color:transparent;box-shadow:0 10px 25px -10px var(--glow)}
+.btn.ghost{background:transparent;color:var(--blue)}
+.chip{border:1px solid #cbd3e1;background:#eef2fb;border-radius:999px;padding:.35rem .65rem;cursor:pointer}
+.section{padding:56px 20px;max-width:1200px;margin:0 auto}
+.section-title{font-size:1.25rem;margin:0 0 18px;letter-spacing:.2px}
+.grid{display:grid;gap:16px}
+.services{grid-template-columns:repeat(12,1fr)}
+.services .card{grid-column:span 6;background:var(--card);border:1px solid #e8ecf5;border-radius:18px;overflow:hidden}
+.services .card img{aspect-ratio:16/10;object-fit:cover}
+.services .card h4{margin:14px 16px 0}
+.services .card p{margin:8px 16px 18px;color:#2a2f36}
+
+.gallery{grid-template-columns:repeat(6,1fr)}
+.gallery .gitem img{aspect-ratio:4/3;object-fit:cover;border-radius:14px;border:1px solid #e8ecf5}
+
+.why{grid-template-columns:repeat(6,1fr)}
+.why-item{grid-column:span 3;background:var(--card);border:1px solid #e8ecf5;border-radius:16px;padding:18px}
+
+.site-header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #e8ecf5;padding:10px 16px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:42px;height:42px;object-fit:contain;filter:drop-shadow(0 0 0 rgba(0,0,0,0))}
+.brand-text h1{margin:0;font-size:1.25rem;line-height:1}
+.brand-text .sub{margin:2px 0 0;color:var(--muted);font-size:.9rem}
+.nav{display:flex;gap:18px;align-items:center;justify-content:flex-end;flex-wrap:wrap}
+.nav a{color:#222}
+.nav .btn{margin-left:6px}
+.toggles{display:flex;gap:6px}
+
+.hero{position:relative;isolation:isolate}
+.hero img{width:100%;height:56svh;object-fit:cover;filter:saturate(1.1) contrast(1.05)}
+.hero-overlay{position:absolute;inset:0;display:grid;place-content:center;gap:12px;text-align:center;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.45))}
+.hero .cta{display:flex;gap:10px;justify-content:center}
+.scroll-down{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);color:#fff;font-size:24px;opacity:.8}
+
+.footer{background:#0a1020;color:#dbe1ff}
+.footer a{color:#fff}
+.footer .contact{max-width:980px;margin:0 auto}
+.contact-form{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:10px}
+.contact-form input,.contact-form textarea{grid-column:span 3;padding:.7rem;border-radius:12px;border:1px solid #cbd3e1}
+.contact-form textarea{grid-column:span 6;resize:vertical}
+.copy{text-align:center;margin:10px 0;color:#9aa8c8}
+
+/* Fade / scroll in */
+.fade{opacity:0;transform:translateY(16px);transition:.6s ease}
+.fade.reveal{opacity:1;transform:none}
+
+/* Logo lightning animation */
+@keyframes lightning {
+  0%, 92%, 100% { filter: drop-shadow(0 0 0 rgba(11,94,215,0)); }
+  93%   { filter: drop-shadow(0 0 12px rgba(11,94,215,.9)); }
+  94%   { filter: drop-shadow(0 0 22px rgba(11,94,215,1)); }
+  95%   { filter: drop-shadow(0 0 10px rgba(11,94,215,.7)); }
+}
+.anim-logo{animation:lightning 6s infinite}
+
+/* ELECTROGROUP animated text (glow + shimmer) */
+.anim-electrogroup{
+  background:linear-gradient(90deg,#fff, #b4ceff, #fff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  background-size:200% 100%;animation:shine 5s linear infinite;
+  text-shadow:0 0 24px rgba(11,94,215,.35);
+}
+@keyframes shine{0%{background-position:0%}100%{background-position:200%}}
+
+/* Dark mode */
+.dark .site-header{background:#0b1220;border-color:#15223a}
+.dark body{color:#eef2ff}
+.dark .services .card,.dark .why-item{background:#0e1730;border-color:#1c2a4b}
+.dark .gallery .gitem img{border-color:#1c2a4b}
+.dark .footer{background:#050a18}
+
+/* Responsive */
+@media (max-width: 1024px){
+  .services .card{grid-column:span 12}
+  .why{grid-template-columns:repeat(2,1fr)}
+  .why-item{grid-column:auto}
+  .gallery{grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width: 640px){
+  .hero img{height:62svh}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .contact-form input{grid-column:span 6}
+}
