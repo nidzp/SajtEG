@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#08203a"/>
+      <stop offset="1" stop-color="#0f2a4d"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#b6dcff"/>
+      <stop offset="1" stop-color="#39aaff"/>
+    </linearGradient>
+    <filter id="glow2" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge>
+        <feMergeNode in="b"/><feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <!-- Wall mount plate -->
+  <rect x="170" y="120" width="260" height="180" rx="10" fill="#122f5a" stroke="#7cc4ff"/>
+  <circle cx="195" cy="145" r="5" fill="#7cc4ff"/>
+  <circle cx="405" cy="145" r="5" fill="#7cc4ff"/>
+  <circle cx="195" cy="305" r="5" fill="#7cc4ff"/>
+  <circle cx="405" cy="305" r="5" fill="#7cc4ff"/>
+  <!-- Transformer box -->
+  <rect x="210" y="150" width="180" height="140" rx="8" fill="#0b1f3a" stroke="#54b4ff" stroke-width="3"/>
+  <g stroke="#7cc4ff" opacity="0.85">
+    <line x1="230" y1="175" x2="370" y2="175"/>
+    <line x1="230" y1="195" x2="370" y2="195"/>
+    <line x1="230" y1="215" x2="370" y2="215"/>
+    <line x1="230" y1="235" x2="370" y2="235"/>
+  </g>
+  <!-- Bolt symbol -->
+  <polygon points="300,180 285,210 305,210 292,240 325,205 305,205 318,180" fill="url(#bolt)" filter="url(#glow2)"/>
+</svg>

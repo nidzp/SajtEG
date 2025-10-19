@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vite --host",
-    "build": "vite build",
-    "preview": "vite preview --host"
-  },
+  "dev": "vite --host",
+  "build": "vite build",
+  "preview": "vite preview --host"
+}
+,
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nidzp/SajtEG.git"

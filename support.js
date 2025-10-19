@@ -1,6 +1,15 @@
 // JavaScript for the dedicated support/FAQ page.
 // Provides interactive toggling for categories and subquestions.
 
+// Ensure shared UI (theme + language) is loaded
+(function loadSharedUI(){
+    if (document.getElementById('eg-ui-js')) return;
+    const s = document.createElement('script');
+    s.src = 'assets/ui.js';
+    s.id = 'eg-ui-js';
+    document.head.appendChild(s);
+})();
+
 document.addEventListener('DOMContentLoaded', () => {
     // Hide the preloader after the intro animation has played
     const preloader = document.getElementById('preloader');
