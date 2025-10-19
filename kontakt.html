@@ -180,7 +180,7 @@
     <section class="section contact-form-section" id="contact-section">
         <div class="container">
             <h2>Pošaljite nam poruku</h2>
-            <form id="contact-form" class="contact-form" action="https://formsubmit.co/nikola.djokic@electrogroup.rs" method="POST">
+            <form id="contact-form" class="contact-form" action="https://formsubmit.co/ajax/nikola.djokic@electrogroup.rs" method="POST">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_subject" value="Novi upit sa sajta ELECTROGROUP">
@@ -203,6 +203,7 @@
                     <label for="ai-summary">Sažetak AI asistenta</label>
                     <div id="ai-summary" class="ai-summary">Niste koristili asistenta na početnoj stranici.</div>
                 </div>
+                <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
                 <button type="submit" class="btn">Pošalji poruku</button>
             </form>
         </div>
