@@ -45,6 +45,7 @@
       brand: 'ELECTROGROUP',
       'nav.about': 'Ko smo mi',
       'nav.focus': 'Fokus',
+      'nav.trafo': 'Trafostanice',
       'nav.team': 'Tim',
       'nav.gallery': 'Galerija',
       'nav.faq': 'FAQ',
@@ -85,6 +86,7 @@
       brand: 'ELECTROGROUP',
       'nav.about': 'About',
       'nav.focus': 'Focus',
+      'nav.trafo': 'Substations',
       'nav.team': 'Team',
       'nav.gallery': 'Gallery',
       'nav.faq': 'FAQ',
@@ -156,19 +158,15 @@
     const dict = i18n[lang] || i18n['sr-lat'];
 
     // data-i18n targeted elements
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      const val = dict[key];
-      if (val) el.textContent = val;
-      else if (lang === 'sr-cyrl') el.textContent = latinToCyrillic(el.textContent);
-    });
-
-    // Header nav links (first 6-7 links expected)
-    const navLinks = document.querySelectorAll('header nav a');
-    if (navLinks.length) {
-      const navKeys = ['nav.about','nav.focus','nav.team','nav.gallery','nav.faq','nav.contact'];
-      navKeys.forEach((k, i) => { if (navLinks[i]) navLinks[i].textContent = dict[k] || navLinks[i].textContent; });
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = dict[key];
+    if (val) {
+      el.textContent = (lang === 'sr-cyrl') ? latinToCyrillic(val) : val;
+    } else if (lang === 'sr-cyrl') {
+      el.textContent = latinToCyrillic(el.textContent);
     }
+  });
 
     // Footer
     const foot = document.querySelector('footer p');
@@ -220,4 +218,3 @@
     if (preText) preText.textContent = (saved === 'sr-cyrl') ? latinToCyrillic(t) : t;
   });
 })();
-
