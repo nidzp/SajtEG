@@ -2227,3 +2227,13 @@ footer {
     100% { opacity: 0; transform: scale(0.8); }
 }
 
+/* Header controls (theme + language) */
+.header-controls { display: inline-flex; gap: 0.5rem; align-items: center; margin-left: 0.75rem; }
+.header-controls .ctrl { 
+  background: var(--card-bg); color: var(--text-light); 
+  border: 1px solid rgba(255,255,255,0.15); border-radius: 6px; 
+  padding: 0.35rem 0.5rem; font-size: 0.9rem; cursor: pointer;
+}
+[data-theme='light'] .header-controls .ctrl {
+  background: #f5f9ff; color: #0a1a2e; border-color: rgba(0,0,0,0.12);
+}
