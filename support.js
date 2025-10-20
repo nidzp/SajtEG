@@ -60,17 +60,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Toggle display of subquestion groups when category headings are clicked
-    document.querySelectorAll('.support-category').forEach(category => {
-        const sectionHeader = category.querySelector('h2');
-        sectionHeader.addEventListener('click', () => {
-            category.classList.toggle('open');
-        });
-        // Toggle individual answers when subquestions are clicked
+    const categories = Array.from(document.querySelectorAll('.support-category'));
+    categories.forEach(category => {
+        const toggle = category.querySelector('.category-toggle');
+        const body = category.querySelector('.category-body');
+        if (toggle && body) {
+            toggle.setAttribute('aria-expanded', 'false');
+            body.dataset.state = 'collapsed';
+            toggle.addEventListener('click', () => {
+                const willOpen = !category.classList.contains('open');
+                categories.forEach(other => {
+                    if (other === category) return;
+                    const otherToggle = other.querySelector('.category-toggle');
+                    const otherBody = other.querySelector('.category-body');
+                    if (otherBody) {
+                        otherBody.dataset.state = 'collapsed';
+                    }
+                    other.classList.remove('open');
+                    if (otherToggle) {
+                        otherToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+                category.classList.toggle('open', willOpen);
+                toggle.setAttribute('aria-expanded', String(willOpen));
+                body.dataset.state = willOpen ? 'expanded' : 'collapsed';
+            });
+        }
+
         category.querySelectorAll('.subquestion').forEach(item => {
-            const question = item.querySelector('h3');
-            question.addEventListener('click', () => {
-                item.classList.toggle('open');
+            const subToggle = item.querySelector('.subquestion-toggle');
+            const answer = item.querySelector('.answer');
+            if (!subToggle || !answer) return;
+            subToggle.setAttribute('aria-expanded', 'false');
+            answer.dataset.state = 'collapsed';
+            subToggle.addEventListener('click', () => {
+                const willOpen = !item.classList.contains('open');
+                item.classList.toggle('open', willOpen);
+                subToggle.setAttribute('aria-expanded', String(willOpen));
+                answer.dataset.state = willOpen ? 'expanded' : 'collapsed';
             });
         });
     });

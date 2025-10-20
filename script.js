@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /*
-     * Letter‑by‑letter animation for the hero title.
+     * Letter-by-letter animation for the hero title.
      * The script splits the text content of the element with class
      * `.hero-title` into individual span elements.  Each span has a
      * sequential animation delay applied inline.  After all letters
@@ -165,6 +165,101 @@ document.addEventListener('DOMContentLoaded', () => {
             if (subtitle) subtitle.classList.add('show');
             if (tagline) tagline.classList.add('show');
         }, totalDuration * 1000);
+    }
+
+    /*
+     * Hero background video rotation.
+     * Two <video> elements are stacked in .hero-video-wrapper. We preload
+     * the next clip on the hidden element, then cross-fade whenever the
+     * active clip finishes. The next clip is always chosen randomly from
+     * the available intros, avoiding immediate repeats.
+     */
+    const heroVideoWrapper = document.querySelector('.hero-video-wrapper');
+    if (heroVideoWrapper) {
+        const videoElements = heroVideoWrapper.querySelectorAll('.hero-video');
+        const introClips = [
+            'assets/intro/intro.mp4',
+            'assets/intro/intro2.mp4',
+            'assets/intro/intro3.mp4',
+            'assets/intro/intro4.mp4'
+        ];
+
+        if (videoElements.length >= 2 && introClips.length) {
+            let activeVideo = videoElements[0];
+            let bufferVideo = videoElements[1];
+            let activeSource = '';
+
+            function pickNextSource(exclude) {
+                const variants = introClips.filter(src => src !== exclude);
+                const pool = variants.length ? variants : introClips;
+                const index = Math.floor(Math.random() * pool.length);
+                return pool[index];
+            }
+
+            function setVideoSource(video, src) {
+                if (!src) return;
+                video.dataset.src = src;
+                video.src = src;
+                video.load();
+            }
+
+            function playVideo(video) {
+                const attemptPlay = () => {
+                    video.currentTime = 0;
+                    const maybePromise = video.play();
+                    if (maybePromise && typeof maybePromise.catch === 'function') {
+                        maybePromise.catch(() => {});
+                    }
+                };
+
+                if (video.readyState >= 2) {
+                    attemptPlay();
+                } else {
+                    video.addEventListener('loadeddata', attemptPlay, { once: true });
+                }
+            }
+
+            function prepareBuffer() {
+                const nextSrc = pickNextSource(activeSource);
+                setVideoSource(bufferVideo, nextSrc);
+                bufferVideo.currentTime = 0;
+            }
+
+            function swapVideos() {
+                const incoming = bufferVideo;
+                const outgoing = activeVideo;
+
+                playVideo(incoming);
+                incoming.classList.add('is-active');
+                outgoing.classList.remove('is-active');
+
+                activeVideo = incoming;
+                bufferVideo = outgoing;
+                activeSource = activeVideo.dataset.src || activeSource;
+
+                bufferVideo.pause();
+                bufferVideo.currentTime = 0;
+                bufferVideo.classList.remove('is-active');
+                prepareBuffer();
+            }
+
+            function handleEnded() {
+                swapVideos();
+                attachEndedListener();
+            }
+
+            function attachEndedListener() {
+                activeVideo.addEventListener('ended', handleEnded, { once: true });
+            }
+
+            activeSource = pickNextSource('');
+            setVideoSource(activeVideo, activeSource);
+            activeVideo.classList.add('is-active');
+            playVideo(activeVideo);
+
+            prepareBuffer();
+            attachEndedListener();
+        }
     }
 
     /* Lightbox functionality for gallery images */

@@ -19,6 +19,9 @@
          inside .preloader-content so the script can hide the overlay
          once the animation completes. -->
     <div id="preloader">
+        <video class="preloader-video" autoplay muted playsinline loop>
+            <source src="assets/intro/superintro.mp4" type="video/mp4">
+        </video>
         <div class="preloader-content">
             <img src="assets/logo.png" alt="ElectroGroup logo" class="preloader-logo">
             <div class="preloader-text">ELECTROGROUP</div>
@@ -39,36 +42,36 @@
                 <a href="#focus">Fokus</a>
                 <a href="#trafostanice">Trafostanice</a>
                 <a href="#team">Tim</a>
-                <a href="#philosophy">Filozofija</a>
                 <a href="#gallery">Galerija</a>
                 <a href="#faq">FAQ</a>
-                <!-- Link to dedicated contact/support page instead of inâ€‘page section -->
+                <!-- Link to dedicated contact/support page instead of in‑page section -->
                 <a href="kontakt.html" class="btn">Kontakt</a>
             </nav>
         </div>
     </header>
 
-    <!-- Hero section with a background video and callâ€‘toâ€‘action buttons -->
+    <!-- Hero section with a background video and call‑to‑action buttons -->
     <section id="hero" class="hero">
-        <!-- Autoplaying background video with a poster for quick loading -->
-        <video autoplay loop muted playsinline class="hero-video" poster="assets/hero-poster.jpg">
-            <source src="assets/intro.mp4" type="video/mp4">
-        </video>
+        <!-- Background video rotation wrapper; individual videos are swapped via JS for cross-fade transitions -->
+        <div class="hero-video-wrapper">
+            <video autoplay muted playsinline preload="auto" class="hero-video is-active" poster="assets/hero-poster.jpg"></video>
+            <video autoplay muted playsinline preload="auto" class="hero-video" poster="assets/hero-poster.jpg"></video>
+        </div>
         <!-- Dark overlay for contrast -->
         <div class="overlay"></div>
         <div class="hero-content">
-            <!-- Letterâ€‘byâ€‘letter animated title and subtitle.  The JavaScript
+            <!-- Letter‑by‑letter animated title and subtitle.  The JavaScript
                  script will split the ELECTROGROUP text into spans and animate
                  them sequentially.  The subtitle and tagline fade in after
                  the title completes. -->
             <h1 class="hero-title">ELECTROGROUP</h1>
             <h2 class="hero-subtitle">ITS DOO Sombor</h2>
             <!-- Tagline summarising our mission in a few words -->
-            <p class="hero-tagline">Energija buduÄ‡nosti</p>
+            <p class="hero-tagline">Energija budućnosti</p>
             <div class="hero-buttons">
-                <a href="kontakt.html" class="btn">PoÅ¡alji upit</a>
+                <a href="kontakt.html" class="btn">Pošalji upit</a>
                 <!-- Scroll down to the About section -->
-                <a href="#about" class="btn outline">Saznaj viÅ¡e</a>
+                <a href="#about" class="btn outline">Saznaj više</a>
             </div>
         </div>
         <!-- Scroll indicator; bounces to invite the user to scroll -->
@@ -79,30 +82,30 @@
     <section id="about" class="section about">
         <div class="container">
             <h2>Ko smo mi</h2>
-            <p>Mi u Electrogroup ITS pomeramo granice u elektroinÅ¾enjeringu, posebno u pogledu sigurnosti i pouzdane distribucije energije. NaÅ¡ tim okuplja vrhunske inÅ¾enjere i struÄnjake sa decenijskim iskustvom. Prvi smo implementirali novi Zakon o bezbednosti â€“ naÅ¡i sistemi rade u skladu s najsavremenijim propisima Äim stupe na snagu. Realizovali smo brojne zahtevne projekte u industriji i energetici, postavljajuÄ‡i temelje za pametnije elektro mreÅ¾e u regionu. NaÅ¡ recept za uspeh je jednostavan: vrhunsko znanje podeljeno u snaÅ¾nom timu, inovativna reÅ¡enja i neprekidna briga o bezbednosti.</p>
+            <p>Mi u Electrogroup ITS pomeramo granice u elektroinženjeringu, posebno u pogledu sigurnosti i pouzdane distribucije energije. Naš tim okuplja vrhunske inženjere i stručnjake sa decenijskim iskustvom. Prvi smo implementirali novi Zakon o bezbednosti – naši sistemi rade u skladu s najsavremenijim propisima čim stupe na snagu. Realizovali smo brojne zahtevne projekte u industriji i energetici, postavljajući temelje za pametnije elektro mreže u regionu. Naš recept za uspeh je jednostavan: vrhunsko znanje podeljeno u snažnom timu, inovativna rešenja i neprekidna briga o bezbednosti.</p>
         </div>
     </section>
 
-    <!-- Focus section outlining what we do and what we donâ€™t do -->
+    <!-- Focus section outlining what we do and what we don’t do -->
     <section id="focus" class="section focus show-on-scroll">
         <div class="container">
-            <h2>NaÅ¡ fokus i Å¡ta ne radimo</h2>
+            <h2>Naš fokus i šta ne radimo</h2>
             <div class="focus-columns">
                 <div class="focus-col">
-                    <h3>NaÅ¡ fokus</h3>
+                    <h3>Naš fokus</h3>
                     <ul>
-                        <li>Kompletna reÅ¡enja â€žkljuÄ u rukeâ€ u oblasti elektroinstalacija i energetike â€“ od projektovanja do izvoÄ‘enja i puÅ¡tanja u pogon.</li>
-                        <li>Industrijski i infrastrukturni projekti: elektroinstalacije za proizvodne hale, distributivne mreÅ¾e, trafostanice, sistemi industrijske automatike i rasvete.</li>
-                        <li>VeÄ‡i stambeni i poslovni kompleksi: napajanje, interna mreÅ¾a i pametne instalacije uz najviÅ¡e bezbednosne standarde.</li>
-                        <li>Integracija obnovljivih izvora: projektovanje i ugradnja solarnih elektrana i drugih sistema za velike potroÅ¡aÄe, uz kompletnu dokumentaciju i prikljuÄenje na mreÅ¾u.</li>
+                        <li>Kompletna rešenja „ključ u ruke” u oblasti elektroinstalacija i energetike – od projektovanja do izvođenja i puštanja u pogon.</li>
+                        <li>Industrijski i infrastrukturni projekti: elektroinstalacije za proizvodne hale, distributivne mreže, trafostanice, sistemi industrijske automatike i rasvete.</li>
+                        <li>Veći stambeni i poslovni kompleksi: napajanje, interna mreža i pametne instalacije uz najviše bezbednosne standarde.</li>
+                        <li>Integracija obnovljivih izvora: projektovanje i ugradnja solarnih elektrana i drugih sistema za velike potrošače, uz kompletnu dokumentaciju i priključenje na mrežu.</li>
                     </ul>
                 </div>
                 <div class="focus-col">
-                    <h3>Å ta nije naÅ¡a delatnost</h3>
+                    <h3>Šta nije naša delatnost</h3>
                     <ul>
-                        <li>Masovna maloprodaja opreme: ne prodajemo solarne panele ili komponente kao pojedinaÄne proizvode.</li>
-                        <li>Mali kuÄ‡ni projekti: ne fokusiramo se na sitne popravke poput zamene osiguraÄa; naÅ¡a snaga su kompleksni projekti.</li>
-                        <li>Standardizovani paketi: ne nudimo univerzalne ponude â€“ svako reÅ¡enje je prilagoÄ‘eno vaÅ¡im potrebama.</li>
+                        <li>Masovna maloprodaja opreme: ne prodajemo solarne panele ili komponente kao pojedinačne proizvode.</li>
+                        <li>Mali kućni projekti: ne fokusiramo se na sitne popravke poput zamene osigurača; naša snaga su kompleksni projekti.</li>
+                        <li>Standardizovani paketi: ne nudimo univerzalne ponude – svako rešenje je prilagođeno vašim potrebama.</li>
                     </ul>
                 </div>
             </div>
@@ -176,31 +179,10 @@
     <!-- Team section highlighting collective expertise and collaboration -->
     <section id="team" class="section team show-on-scroll">
         <div class="container">
-            <h2>NaÅ¡ tim</h2>
-            <p>NaÅ¡ tim Äini grupa iskusnih elektro inÅ¾enjera, sertifikovanih elektromontera i projektanata â€“ Äije se iskustvo meri decenijama. Verujemo u timski rad â€“ naÅ¡e najvaÅ¾nije projekte ne gradi jedan inÅ¾enjer, veÄ‡ ceo kolektiv. Svaki Älan doprinosi svojom struÄnoÅ¡Ä‡u, a zajedno pokrivamo sve aspekte, od ideje do realizacije. Iako smo ponosni na naÅ¡a znanja, joÅ¡ viÅ¡e smo ponosni na pristup klijentima: kod nas nema skrivenih informacija, svaki klijent je ravnopravan Älan tima. Otvorena komunikacija i partnerski odnos donose najbolje rezultate.</p>
+            <h2>Naš tim</h2>
+            <p>Naš tim čini grupa iskusnih elektro inženjera, sertifikovanih elektromontera i projektanata – čije se iskustvo meri decenijama. Verujemo u timski rad – naše najvažnije projekte ne gradi jedan inženjer, već ceo kolektiv. Svaki član doprinosi svojom stručnošću, a zajedno pokrivamo sve aspekte, od ideje do realizacije. Iako smo ponosni na naša znanja, još više smo ponosni na pristup klijentima: kod nas nema skrivenih informacija, svaki klijent je ravnopravan član tima. Otvorena komunikacija i partnerski odnos donose najbolje rezultate.</p>
             <div class="team-image">
-                <img src="assets/radovi22.jpeg" alt="NaÅ¡ tim na terenu">
-            </div>
-        </div>
-    </section>
-
-    <!-- Philosophy section expressing our core values -->
-    <section id="philosophy" class="section philosophy show-on-scroll">
-        <div class="container">
-            <h2>NaÅ¡a filozofija</h2>
-            <div class="philosophy-cards">
-                <div class="philosophy-card">
-                    <h3>Sigurnost</h3>
-                    <p>Bezbednost je na prvom mestu. Svaki projekat planiramo i realizujemo uz strogo poÅ¡tovanje svih propisa. Ne pravimo kompromise sa sigurnoÅ¡Ä‡u ljudi, postrojenja ni okoline â€“ sigurna energija je osnova odrÅ¾ivog poslovanja.</p>
-                </div>
-                <div class="philosophy-card">
-                    <h3>Saradnja</h3>
-                    <p>Zajedno do najboljeg reÅ¡enja. Radimo timski i blisko saraÄ‘ujemo sa klijentima i partnerima. SluÅ¡amo, ukljuÄujemo ih u proces i gradimo poverenje. Otvorena komunikacija i timski duh donose odrÅ¾iva reÅ¡enja.</p>
-                </div>
-                <div class="philosophy-card">
-                    <h3>Odgovornost</h3>
-                    <p>Preuzimamo odgovornost za svaki volt. PridrÅ¾avamo se rokova, ispunjavamo obeÄ‡anja i ostajemo dostupni za podrÅ¡ku. NaÅ¡a reÅ¡enja su energetski efikasna i ekoloÅ¡ki prihvatljiva kada god je to moguÄ‡e.</p>
-                </div>
+                <img src="assets/radovi22.jpeg" alt="Naš tim na terenu">
             </div>
         </div>
     </section>
@@ -214,11 +196,11 @@
                 <img src="assets/radovi_2.jpeg" alt="Rad na trafostanici">
                 <img src="assets/radovi_3.jpeg" alt="Stubna trafostanica">
                 <img src="assets/radovi_na_visini.jpeg" alt="Radovi na visini">
-                <img src="assets/trafo_stanica_2.jpeg" alt="MontaÅ¾a trafostanice">
-                <img src="assets/trafo_stanica.jpeg" alt="Trafo stanica noÄ‡u">
-                <img src="assets/vozilo.jpeg" alt="Specijalno vozilo za mreÅ¾ne radove">
+                <img src="assets/trafo_stanica_2.jpeg" alt="Montaža trafostanice">
+                <img src="assets/trafo_stanica.jpeg" alt="Trafo stanica noću">
+                <img src="assets/vozilo.jpeg" alt="Specijalno vozilo za mrežne radove">
                 <img src="assets/paneli.jpeg" alt="Solarne elektrane">
-                <img src="assets/oprema_pomm.jpeg" alt="ElektriÄna oprema i razvodni ormari">
+                <img src="assets/oprema_pomm.jpeg" alt="Električna oprema i razvodni ormari">
                 <img src="assets/stubna_trafa.jpeg" alt="Stubna trafostanica i spojnice">
             </div>
         </div>
@@ -228,35 +210,35 @@
     <!-- FAQ section with common questions and answers -->
     <section id="faq" class="section faq">
         <div class="container">
-            <h2>ÄŒesta pitanja</h2>
+            <h2>Česta pitanja</h2>
             <div class="faq-list show-on-scroll">
                 <div class="faq-item">
                     <h3 class="faq-question">Kako radite?</h3>
-                    <p class="faq-answer">Radimo iskljuÄivo po najviÅ¡im standardima bezbednosti i kvaliteta. NaÅ¡ tim prati najnovije propise i prvi smo uveli moderne norme bezbednosti u Srbiji.</p>
+                    <p class="faq-answer">Radimo isključivo po najvišim standardima bezbednosti i kvaliteta. Naš tim prati najnovije propise i prvi smo uveli moderne norme bezbednosti u Srbiji.</p>
                 </div>
                 <div class="faq-item">
-                    <h3 class="faq-question">Koje usluge pruÅ¾ate?</h3>
-                    <p class="faq-answer">Kompletan spektar elektroinÅ¾enjeringa â€“ od projektovanja do realizacije energetske infrastrukture. Fokus nam je na mreÅ¾i i sigurnosti, dok su solarne elektrane dopunska usluga.</p>
+                    <h3 class="faq-question">Koje usluge pružate?</h3>
+                    <p class="faq-answer">Kompletan spektar elektroinženjeringa – od projektovanja do realizacije energetske infrastrukture. Fokus nam je na mreži i sigurnosti, dok su solarne elektrane dopunska usluga.</p>
                 </div>
                 <div class="faq-item">
                     <h3 class="faq-question">Da li radite van Srbije?</h3>
-                    <p class="faq-answer">NaÅ¡ tim je spreman da pruÅ¾i podrÅ¡ku projektima Å¡irom regiona, uz diskreciju i profesionalizam.</p>
+                    <p class="faq-answer">Naš tim je spreman da pruži podršku projektima širom regiona, uz diskreciju i profesionalizam.</p>
                 </div>
                 <div class="faq-item">
                     <h3 class="faq-question">Kako mogu da vas kontaktiram?</h3>
-                    <p class="faq-answer">Putem kontakt forme u nastavku ili pozivom na naÅ¡ broj. Tu smo da odgovorimo na sva pitanja.</p>
+                    <p class="faq-answer">Putem kontakt forme u nastavku ili pozivom na naš broj. Tu smo da odgovorimo na sva pitanja.</p>
                 </div>
             </div>
         </div>
     </section>
 
 
-    <!-- Removed the inâ€‘page contact form.  A dedicated page is now provided (kontakt.html) with full support and contact details. -->
+    <!-- Removed the in‑page contact form.  A dedicated page is now provided (kontakt.html) with full support and contact details. -->
 
     <!-- Footer with copyright notice -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 ELECTROGROUP ITS DOO Sombor. Sva prava zadrÅ¾ana.</p>
+            <p>&copy; 2025 ELECTROGROUP ITS DOO Sombor. Sva prava zadržana.</p>
         </div>
     </footer>
 
@@ -265,20 +247,20 @@
         <button id="chat-toggle" aria-label="Otvori chat"><span>&#128172;</span></button>
         <div id="chatbox" class="chatbox">
             <div class="chatbox-header">
-                <h3>Kako vam moÅ¾emo pomoÄ‡i?</h3>
+                <h3>Kako vam možemo pomoći?</h3>
                 <button id="chat-close" aria-label="Zatvori chat">&times;</button>
             </div>
             <div class="chatbox-content">
                 <p>Odaberite jedno od pitanja:</p>
                 <ul class="chat-options">
-                    <li data-answer="prikljucak">Koja vam je vrsta prikljuÄka potrebna?</li>
-                    <li data-answer="bezbednost">Imate li specifiÄne zahteve za bezbednost?</li>
-                    <li data-answer="lokacija">Da li je lokacija vaÅ¡eg objekta urbanizovana ili udaljena?</li>
-                    <li data-answer="napon">Koje naponske karakteristike oÄekujete?</li>
+                    <li data-answer="prikljucak">Koja vam je vrsta priključka potrebna?</li>
+                    <li data-answer="bezbednost">Imate li specifične zahteve za bezbednost?</li>
+                    <li data-answer="lokacija">Da li je lokacija vašeg objekta urbanizovana ili udaljena?</li>
+                    <li data-answer="napon">Koje naponske karakteristike očekujete?</li>
                 </ul>
                 <div class="chat-response hidden">
                     <p class="response-text"></p>
-                    <button class="contact-btn">Kontaktiraj inÅ¾enjera</button>
+                    <button class="contact-btn">Kontaktiraj inženjera</button>
                 </div>
             </div>
         </div>
@@ -290,7 +272,7 @@
         <img class="lightbox-img" src="#" alt="Pregled slike">
     </div>
 
-    <!-- Main JavaScript controlling scrollâ€‘triggered animations and header behavior -->
-    <script src="script.js"></script>
+    <!-- Main JavaScript controlling scroll‑triggered animations and header behavior -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>
