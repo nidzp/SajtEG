@@ -1,19 +1,12 @@
 /*
  * Custom JavaScript for Electrogroup ITS website.
  *
- * Implements scroll‑triggered animations, header style changes on scroll
+ * Implements scroll-triggered animations, header style changes on scroll
  * and a simple parallax fade effect for the hero content. Intersection
  * Observer is used to reveal elements as they enter the viewport.
  */
 
-// Ensure shared UI (theme + language) is loaded
-(function loadSharedUI(){
-    if (document.getElementById('eg-ui-js')) return;
-    const s = document.createElement('script');
-    s.src = 'assets/ui.js';
-    s.id = 'eg-ui-js';
-    document.head.appendChild(s);
-})();
+import './assets/ui.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Hide the preloader after the intro animation finishes (around 4 seconds).
