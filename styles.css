@@ -136,11 +136,8 @@ body::after {
 .about, .focus, .philosophy, .gallery, .contact {
     background: var(--section-bg);
     color: var(--text-dark);
-    -webkit-backdrop-filter: blur(6px);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
-    backdrop-filter: blur(6px);
 }
 .team, .faq {
     background: var(--section-alt-bg);
