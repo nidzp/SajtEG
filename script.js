@@ -107,18 +107,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const gallery = document.querySelector('.gallery-grid');
     if (gallery) {
         observer.observe(gallery);
-        const generated = [
-            { src: 'assets/generated/trafo-station.svg', alt: 'Ilustracija trafostanice' },
-            { src: 'assets/generated/wall-transformer.svg', alt: 'Zidna trafostanica' },
-            { src: 'assets/generated/cable-joint.svg', alt: 'Spojnica kablovskog voda' }
-        ];
-        generated.forEach(({ src, alt }) => {
-            const img = document.createElement('img');
-            img.src = src;
-            img.alt = alt;
-            img.loading = 'lazy';
-            gallery.appendChild(img);
-        });
     }
 
     // Sequentially reveal transformer cards once the section enters the viewport

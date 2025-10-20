@@ -305,6 +305,49 @@ body::after {
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
 }
 
+.team-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+}
+
+.team-photo {
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 12px 26px rgba(0, 32, 96, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(28px);
+}
+
+.team-photo.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.team-photo img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+}
+
+.team-photo figcaption {
+    padding: 0.9rem 1rem 1.2rem;
+    font-size: 0.95rem;
+    color: #12335b;
+    line-height: 1.4;
+}
+
+.team-photo:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 28px rgba(0, 32, 96, 0.18);
+}
+
 /* Philosophy cards */
 .philosophy-cards {
     display: flex;
@@ -573,19 +616,108 @@ body::after {
     to { opacity: 0; visibility: hidden; }
 }
 
-/* Remove the old circular badge completely */
-.preloader-lightning { display: none !important; }
-
 /* Cinematic lightning around logo using pseudo-elements */
 #preloader .preloader-content {
     position: relative;
+    z-index: 1;
 }
+
+.preloader-lightning {
+    position: absolute;
+    inset: -70px;
+    pointer-events: none;
+    display: block;
+    z-index: -1;
+    filter: drop-shadow(0 0 12px rgba(120,190,255,0.55));
+}
+
+.preloader-lightning .bolt {
+    position: absolute;
+    width: 36px;
+    height: 150px;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(168,216,255,0.55) 40%, rgba(255,255,255,0.95) 100%);
+    clip-path: polygon(50% 0%, 70% 12%, 58% 28%, 80% 42%, 52% 100%, 10% 100%, 32% 58%, 12% 44%, 34% 18%);
+    mix-blend-mode: screen;
+    opacity: 0;
+    transform-origin: top center;
+    filter: drop-shadow(0 0 12px rgba(141,211,255,0.85)) drop-shadow(0 0 32px rgba(141,211,255,0.55));
+    --angle: 0deg;
+    transform: rotate(var(--angle)) scaleY(0.45) translateY(-14px);
+    animation: lightningPulse 3s infinite;
+}
+
+.preloader-lightning .bolt::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: inherit;
+    background: inherit;
+    opacity: 0.5;
+    filter: blur(4px);
+}
+
+.preloader-lightning .bolt-1 {
+    top: -32px;
+    left: -38px;
+    --angle: -18deg;
+    animation-duration: 3.6s;
+    animation-delay: 0.35s;
+}
+
+.preloader-lightning .bolt-2 {
+    top: -42px;
+    right: -44px;
+    --angle: 20deg;
+    animation-duration: 3.2s;
+    animation-delay: 0.9s;
+}
+
+.preloader-lightning .bolt-3 {
+    bottom: -48px;
+    left: -26px;
+    --angle: 16deg;
+    animation-duration: 3.4s;
+    animation-delay: 1.55s;
+}
+
+.preloader-lightning .bolt-4 {
+    bottom: -40px;
+    right: -30px;
+    --angle: -22deg;
+    animation-duration: 3.1s;
+    animation-delay: 2.05s;
+}
+
+.preloader-lightning .spark {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(142,205,255,0.65) 45%, rgba(142,205,255,0) 70%);
+    opacity: 0;
+    mix-blend-mode: screen;
+    animation: sparkBlink 2.8s infinite;
+}
+
+.preloader-lightning .spark-1 {
+    top: -52px;
+    left: 40%;
+    animation-delay: 0.8s;
+}
+
+.preloader-lightning .spark-2 {
+    bottom: -58px;
+    right: 38%;
+    animation-delay: 1.9s;
+}
+
 #preloader .preloader-content::before,
 #preloader .preloader-content::after {
     content: '';
     position: absolute;
     inset: -40px;
     pointer-events: none;
+    z-index: -2;
 }
 /* Forked bolt on left */
 #preloader .preloader-content::before {
@@ -611,6 +743,44 @@ body::after {
     87%, 89% { opacity: 1; }
     90%, 92% { opacity: 0; }
     93%, 95% { opacity: 1; }
+}
+
+@keyframes lightningPulse {
+    0%, 68%, 100% {
+        opacity: 0;
+        transform: rotate(var(--angle)) scaleY(0.35) translateY(-18px);
+    }
+    70% {
+        opacity: 1;
+        transform: rotate(var(--angle)) scaleY(1.1) translateY(-2px);
+    }
+    72% {
+        opacity: 0.45;
+        transform: rotate(var(--angle)) scaleY(0.8) translateY(10px);
+    }
+    74% {
+        opacity: 1;
+        transform: rotate(var(--angle)) scaleY(1.05) translateY(-6px);
+    }
+    78% {
+        opacity: 0;
+        transform: rotate(var(--angle)) scaleY(0.4) translateY(16px);
+    }
+}
+
+@keyframes sparkBlink {
+    0%, 70%, 100% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    74% {
+        opacity: 1;
+        transform: scale(1.6);
+    }
+    78% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
 }
 
 @keyframes pozadinaPulse {
@@ -985,6 +1155,15 @@ body.nav-open .nav-toggle-icon::after {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
+}
+
+.services-intro {
+    max-width: 760px;
+    margin: 0 auto 2.4rem;
+    text-align: center;
+    font-size: 1.05rem;
+    color: #1f3f66;
+    line-height: 1.6;
 }
 
 .card {
@@ -2197,19 +2376,6 @@ footer {
     opacity: 0;
     animation: titleFade 2s forwards 1.5s;
 }
-.preloader-lightning {
-    width: 48px;
-    height: 48px;
-    margin-top: 0.6rem;
-    background-image: url('assets/hero-poster.jpg');
-    background-size: cover;
-    background-position: center;
-    filter: brightness(2);
-    border-radius: 50%;
-    opacity: 0;
-    animation: lightningFlash 1.2s forwards 2.8s;
-}
-
 @keyframes logoBlur {
     0% { opacity: 0; filter: blur(28px) drop-shadow(0 0 10px rgba(84,180,255,0.35)) drop-shadow(0 0 24px rgba(84,180,255,0.25)); transform: scale(0.8); }
     50% { opacity: 1; filter: blur(12px) drop-shadow(0 0 18px rgba(84,180,255,0.6)) drop-shadow(0 0 36px rgba(154,215,255,0.45)); transform: scale(1); }
@@ -2219,12 +2385,6 @@ footer {
 @keyframes titleFade {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes lightningFlash {
-    0% { opacity: 0; transform: scale(0.6); }
-    40% { opacity: 1; transform: scale(1.4); }
-    100% { opacity: 0; transform: scale(0.8); }
 }
 
 /* Header controls (theme + language) */
