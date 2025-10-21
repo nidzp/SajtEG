@@ -8,13 +8,168 @@
 
 import './assets/ui.js';
 
+const initPreloaderLightning = () => {
+    const container = document.querySelector('.preloader-lightning');
+    const canvas = container ? container.querySelector('#preloader-lightning-canvas') : null;
+    if (!container || !canvas) {
+        return () => {};
+    }
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) {
+        return () => {};
+    }
+
+    const bolts = [];
+    let width = container.clientWidth || window.innerWidth;
+    let height = container.clientHeight || window.innerHeight;
+    let frameId = 0;
+    let lastTime = performance.now();
+    let spawnTimer = 0;
+
+    const resize = () => {
+        width = container.clientWidth || window.innerWidth;
+        height = container.clientHeight || window.innerHeight;
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.scale(dpr, dpr);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const buildBolt = (startX, startY, depth = 0) => {
+        const segments = [];
+        const branches = [];
+        const segmentCount = depth === 0 ? 20 + Math.floor(Math.random() * 6) : 10 + Math.floor(Math.random() * 6);
+        let x = startX;
+        let y = startY;
+        const lateralJitter = width * (depth === 0 ? 0.12 : 0.08);
+
+        for (let i = 0; i < segmentCount; i++) {
+            const drift = (Math.random() - 0.5) * lateralJitter;
+            const step = (height / (segmentCount + 2)) * (0.7 + Math.random() * 0.6);
+            const nextX = x + drift;
+            const nextY = y + step;
+            segments.push({ x, y, nx: nextX, ny: nextY });
+
+            if (depth < 2 && i > 3 && Math.random() < (depth === 0 ? 0.35 : 0.25)) {
+                branches.push(buildBolt(nextX, nextY, depth + 1));
+            }
+
+            x = nextX;
+            y = nextY;
+            if (y > height + height * 0.18) {
+                break;
+            }
+        }
+
+        return { segments, branches };
+    };
+
+    const spawnBolt = () => {
+        const startX = width * (0.08 + Math.random() * 0.84);
+        const bolt = buildBolt(startX, -height * 0.15);
+        bolts.push({
+            segments: bolt.segments,
+            branches: bolt.branches,
+            life: 0,
+            maxLife: 320 + Math.random() * 220,
+            thickness: 2 + Math.random() * 2.8
+        });
+        if (bolts.length > 10) {
+            bolts.splice(0, bolts.length - 10);
+        }
+    };
+
+    const drawBolt = (branch, thickness, depth = 0) => {
+        if (!branch || !branch.segments.length) {
+            return;
+        }
+        const widthFactor = Math.max(0.6, thickness - depth * 0.7);
+        ctx.lineWidth = widthFactor;
+        ctx.beginPath();
+        branch.segments.forEach(segment => {
+            ctx.moveTo(segment.x, segment.y);
+            ctx.lineTo(segment.nx, segment.ny);
+        });
+        ctx.stroke();
+        if (branch.branches) {
+            branch.branches.forEach(child => drawBolt(child, thickness * 0.7, depth + 1));
+        }
+    };
+
+    const render = (time) => {
+        const delta = time - lastTime;
+        lastTime = time;
+        spawnTimer += delta;
+        if (spawnTimer > 420) {
+            spawnBolt();
+            if (Math.random() > 0.6) {
+                spawnBolt();
+            }
+            spawnTimer = 0;
+        }
+
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.fillStyle = 'rgba(0, 10, 24, 0.22)';
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        for (let i = bolts.length - 1; i >= 0; i--) {
+            const bolt = bolts[i];
+            bolt.life += delta;
+            const alpha = 1 - bolt.life / bolt.maxLife;
+            if (alpha <= 0) {
+                bolts.splice(i, 1);
+                continue;
+            }
+
+            ctx.shadowColor = `rgba(70, 160, 255, ${alpha})`;
+            ctx.shadowBlur = 30;
+            ctx.strokeStyle = `rgba(186, 236, 255, ${alpha * 0.9})`;
+            drawBolt(bolt, bolt.thickness + 1.6, 0);
+
+            ctx.shadowColor = `rgba(40, 120, 255, ${alpha})`;
+            ctx.shadowBlur = 12;
+            ctx.strokeStyle = `rgba(118, 198, 255, ${alpha * 0.75})`;
+            drawBolt(bolt, bolt.thickness, 0);
+        }
+
+        frameId = requestAnimationFrame(render);
+    };
+
+    // Start with a couple of strikes so the overlay is alive immediately.
+    spawnBolt();
+    spawnBolt();
+    frameId = requestAnimationFrame(render);
+
+    return () => {
+        cancelAnimationFrame(frameId);
+        window.removeEventListener('resize', resize);
+        bolts.length = 0;
+        ctx.clearRect(0, 0, width, height);
+    };
+};
+
 document.addEventListener('DOMContentLoaded', () => {
+    const stopLightning = initPreloaderLightning();
+
     // Hide the preloader after the intro animation finishes (around 4 seconds).
     const preloader = document.getElementById('preloader');
     if (preloader) {
         setTimeout(() => {
             preloader.style.display = 'none';
+            stopLightning();
         }, 4000);
+    } else {
+        stopLightning();
     }
     // Add / remove 'scrolled' class to header when user scrolls
     const header = document.querySelector('header');
