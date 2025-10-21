@@ -1,13 +1,17 @@
-// Shared UI helpers: theme toggle + language switcher (SR Latin, SR Cyrillic, EN).
-// Injects controls into the header nav, persists preferences, and updates inline copy.
-
+/**
+ * Shared UI helpers for theme and language toggles (Serbian / English).
+ * Injects controls into the header, persists preferences, and applies translations.
+ */
 (function () {
+  'use strict';
+
   const LS = { theme: 'eg_theme', lang: 'eg_lang' };
-  const FALLBACK_SELECTOR = '.section p, .section li, .section h1, .section h2, .section h3, .btn';
 
   function ensureControls() {
     const nav = document.querySelector('header nav');
-    if (!nav) return {};
+    if (!nav) {
+      return {};
+    }
 
     let wrapper = nav.querySelector('.header-controls');
     if (!wrapper) {
@@ -18,17 +22,16 @@
       themeBtn.id = 'theme-toggle';
       themeBtn.className = 'ctrl';
       themeBtn.type = 'button';
-      themeBtn.title = 'Tema';
+      themeBtn.title = 'Promeni temu';
       themeBtn.setAttribute('aria-label', 'Promeni temu');
-      themeBtn.textContent = '☾';
+      themeBtn.textContent = '\u2600';
 
       const langSel = document.createElement('select');
       langSel.id = 'lang-select';
       langSel.className = 'ctrl';
       langSel.setAttribute('aria-label', 'Jezik');
       langSel.innerHTML = [
-        '<option value="sr-lat">SR (lat)</option>',
-        '<option value="sr-cyrl">SR (ћир)</option>',
+        '<option value="sr">SR</option>',
         '<option value="en">EN</option>'
       ].join('');
 
@@ -43,60 +46,7 @@
     };
   }
 
-  function latinToCyrillic(str) {
-    if (!str) return str;
-    let out = str;
-
-    const digraphs = [
-      [/NJ/g, 'Њ'],
-      [/Nj/g, 'Њ'],
-      [/nj/g, 'њ'],
-      [/LJ/g, 'Љ'],
-      [/Lj/g, 'Љ'],
-      [/lj/g, 'љ'],
-      [/DŽ/g, 'Џ'],
-      [/Dž/g, 'Џ'],
-      [/dž/g, 'џ']
-    ];
-    digraphs.forEach(([pattern, replacement]) => {
-      out = out.replace(pattern, replacement);
-    });
-
-    const map = {
-      A: 'А', a: 'а',
-      B: 'Б', b: 'б',
-      C: 'Ц', c: 'ц',
-      Č: 'Ч', č: 'ч',
-      Ć: 'Ћ', ć: 'ћ',
-      D: 'Д', d: 'д',
-      Đ: 'Ђ', đ: 'ђ',
-      E: 'Е', e: 'е',
-      F: 'Ф', f: 'ф',
-      G: 'Г', g: 'г',
-      H: 'Х', h: 'х',
-      I: 'И', i: 'и',
-      J: 'Ј', j: 'ј',
-      K: 'К', k: 'к',
-      L: 'Л', l: 'л',
-      M: 'М', m: 'м',
-      N: 'Н', n: 'н',
-      O: 'О', o: 'о',
-      P: 'П', p: 'п',
-      R: 'Р', r: 'р',
-      S: 'С', s: 'с',
-      Š: 'Ш', š: 'ш',
-      T: 'Т', t: 'т',
-      U: 'У', u: 'у',
-      V: 'В', v: 'в',
-      Z: 'З', z: 'з',
-      Ž: 'Ж', ž: 'ж'
-    };
-
-    out = Array.from(out).map(ch => map[ch] || ch).join('');
-    return out;
-  }
-
-  const srLat = {
+  const sr = {
     brand: 'ELECTROGROUP',
     'nav.why': 'Za\u0161to ELECTROGROUP?',
     'nav.about': 'Ko smo mi',
@@ -106,41 +56,37 @@
     'nav.gallery': 'Galerija',
     'nav.faq': 'FAQ',
     'nav.contact': 'Kontakt',
-    'footer.copy': '© 2025 ELECTROGROUP ITS DOO Sombor. Sva prava zadržana.',
+    'footer.copy': '\u00A9 2025 ELECTROGROUP ITS DOO Sombor. Sva prava zadr\u017eana.',
 
-    'support.eyebrow': 'Podrška i saradnja',
+    'support.eyebrow': 'Podr\u0161ka i saradnja',
     'support.title': 'Partner za sigurne elektro sisteme',
-    'support.intro': 'Electrogroup ITS preuzima odgovornost za kompletan elektroenergetski ciklus – od ideje do 24/7 održavanja. Ova strana prikuplja sve kontakt kanale, prikazuje reference i daje jasne smernice kako da pokrenete projekat sa našim timom.',
-    'support.cta.consult': 'Zatraži konsultacije',
+    'support.intro': 'Electrogroup ITS preuzima odgovornost za kompletan elektroenergetski ciklus - od ideje do 24/7 odr\u017eavanja. Ova strana prikuplja sve kontakt kanale, prikazuje reference i daje jasne smernice kako da pokrenete projekat sa na\u0161im timom.',
+    'support.cta.consult': 'Zatra\u017ei konsultacije',
     'support.cta.call': 'Pozovi +381 63 108 5618',
-    'support.hl.1': 'Licencirani inženjeri i elektromonteri za srednji i visoki napon',
+    'support.hl.1': 'Licencirani in\u017eenjeri i elektromonteri za srednji i visoki napon',
     'support.hl.2': 'Specijalizovane ekipe za rad na visini i u kriznim uslovima',
     'support.hl.3': 'Brze intervencije na trafostanicama, spojnicama i industrijskim postrojenjima',
-    'support.figcaption': 'Mobilne radionice i vozila sa dizalicama omogućavaju brze intervencije širom regiona.',
+    'support.figcaption': 'Mobilne radionice i vozila sa dizalicama omogu\u0107avaju brze intervencije \u0161irom regiona.',
 
     'contact.form.title': 'Onlajn upit',
-    'contact.form.intro': 'Popunite formu kako bismo vas povezali sa odgovornim inženjerom. Obavezna polja označena su sa *.',
+    'contact.form.intro': 'Popunite formu kako bismo vas povezali sa odgovornim in\u017eenjerom. Obavezna polja ozna\u010dena su sa *.',
     'contact.form.name': 'Ime i prezime *',
     'contact.form.company': 'Kompanija',
     'contact.form.email': 'Email *',
     'contact.form.phone': 'Telefon *',
     'contact.form.type': 'Vrsta projekta *',
     'contact.form.type.choose': 'Izaberite',
-    'contact.form.type.joints': 'Spojnice i priključenja',
+    'contact.form.type.joints': 'Spojnice i priklju\u010denja',
     'contact.form.type.trafo': 'Trafostanica',
     'contact.form.type.solar': 'Solarni ili hibridni sistem',
-    'contact.form.type.modern': 'Modernizacija postojećih postrojenja',
+    'contact.form.type.modern': 'Modernizacija postoje\u0107ih postrojenja',
     'contact.form.type.other': 'Drugo',
     'contact.form.desc': 'Opis projekta *',
-    'contact.form.consent': 'Saglasan/saglasna sam da Electrogroup ITS obrađuje moje podatke radi pripreme ponude.',
-    'contact.form.submit': 'Pošalji poruku',
-    'contact.form.note': 'Ne šaljemo newsletter. Vaše podatke čuvamo isključivo za komunikaciju u vezi sa projektom.'
+    'contact.form.consent': 'Saglasan/saglasna sam da ElectroGroup ITS obra\u0111uje moje podatke radi pripreme ponude.',
+    'contact.form.submit': 'Po\u0161alji poruku',
+    'contact.form.note': 'Ne \u0161aljemo newsletter. Va\u0161e podatke \u010duvamo isklju\u010divo za komunikaciju u vezi sa projektom.'
   };
 
-  const srCyr = Object.fromEntries(
-    Object.entries(srLat).map(([key, value]) => [key, latinToCyrillic(value)])
-  );
-  srCyr.brand = srLat.brand; // zadržati brend u latiničnoj formi
   const en = {
     brand: 'ELECTROGROUP',
     'nav.why': 'Why ELECTROGROUP?',
@@ -177,24 +123,17 @@
     'contact.form.type.modern': 'Modernization of existing plants',
     'contact.form.type.other': 'Other',
     'contact.form.desc': 'Project description *',
-    'contact.form.consent': 'I agree that Electrogroup ITS processes my data to prepare an offer.',
+    'contact.form.consent': 'I agree that ElectroGroup ITS processes my data to prepare an offer.',
     'contact.form.submit': 'Send message',
     'contact.form.note': 'We do not send newsletters. We store your data solely to communicate about the project.'
   };
 
-  const i18n = {
-    'sr-lat': srLat,
-    'sr-cyrl': srCyr,
-    en
-  };
+  const i18n = { sr, en };
 
   function setLangAttrs(lang) {
     if (lang === 'en') {
       document.documentElement.lang = 'en';
       document.documentElement.setAttribute('data-script', 'latn');
-    } else if (lang === 'sr-cyrl') {
-      document.documentElement.lang = 'sr';
-      document.documentElement.setAttribute('data-script', 'cyrl');
     } else {
       document.documentElement.lang = 'sr';
       document.documentElement.setAttribute('data-script', 'latn');
@@ -202,10 +141,10 @@
   }
 
   function applyTranslations(lang) {
+    const dict = i18n[lang] || sr;
     setLangAttrs(lang);
-    const dict = i18n[lang] || srLat;
 
-    document.querySelectorAll('[data-i18n]').forEach(el => {
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = el.getAttribute('data-i18n');
       if (!el.dataset.i18nOriginal) {
         el.dataset.i18nOriginal = el.textContent;
@@ -214,34 +153,10 @@
       const text = dict[key];
       if (typeof text === 'string') {
         el.textContent = text;
-      } else if (lang === 'sr-cyrl') {
-        el.textContent = latinToCyrillic(el.dataset.i18nOriginal || el.textContent);
       } else if (el.dataset.i18nOriginal) {
         el.textContent = el.dataset.i18nOriginal;
       }
     });
-
-    document.querySelectorAll(FALLBACK_SELECTOR).forEach(el => {
-      if (el.hasAttribute('data-i18n')) return;
-      if (!el.dataset.i18nOriginal) {
-        el.dataset.i18nOriginal = el.textContent;
-      }
-
-      let text = el.dataset.i18nOriginal;
-      if (lang === 'sr-cyrl') {
-        text = latinToCyrillic(text);
-      }
-      el.textContent = text;
-    });
-
-    const preText = document.querySelector('.preloader-text');
-    if (preText) {
-      if (!preText.dataset.i18nOriginal) {
-        preText.dataset.i18nOriginal = srLat.brand;
-      }
-      const branded = (lang === 'sr-cyrl') ? srCyr.brand : (dict.brand || srLat.brand);
-      preText.textContent = branded;
-    }
   }
 
   function setTheme(theme) {
@@ -249,13 +164,16 @@
     try {
       localStorage.setItem(LS.theme, theme);
     } catch (err) {
-      /* noop */
+      // noop
     }
   }
 
   function updateThemeIcon(button, theme) {
-    if (!button) return;
-    button.textContent = theme === 'light' ? '☀' : '☾';
+    if (!button) {
+      return;
+    }
+    button.textContent = theme === 'light' ? '\u2600' : '\u263D';
+    button.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
   }
 
   function initTheme(button) {
@@ -265,7 +183,10 @@
     setTheme(theme);
     updateThemeIcon(button, theme);
 
-    if (!button) return;
+    if (!button) {
+      return;
+    }
+
     button.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
       const next = current === 'light' ? 'dark' : 'light';
@@ -274,23 +195,33 @@
     });
   }
 
+  function normalizeLang(value) {
+    if (value === 'sr-lat' || value === 'sr-cyrl') {
+      return 'sr';
+    }
+    return i18n[value] ? value : 'sr';
+  }
+
   function initLang(select) {
     const saved = (typeof localStorage !== 'undefined') ? localStorage.getItem(LS.lang) : null;
-    const lang = i18n[saved] ? saved : 'sr-lat';
+    const lang = normalizeLang(saved);
     if (select) {
       select.value = lang;
     }
     applyTranslations(lang);
 
-    if (!select) return;
+    if (!select) {
+      return;
+    }
+
     select.addEventListener('change', () => {
-      const value = select.value;
+      const next = normalizeLang(select.value);
       try {
-        localStorage.setItem(LS.lang, value);
+        localStorage.setItem(LS.lang, next);
       } catch (err) {
-        /* noop */
+        // noop
       }
-      applyTranslations(value);
+      applyTranslations(next);
     });
   }
 
@@ -300,6 +231,4 @@
     initLang(langSel);
   });
 })();
-
-
 
