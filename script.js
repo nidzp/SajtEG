@@ -157,89 +157,32 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     const heroVideoWrapper = document.querySelector('.hero-video-wrapper');
     if (heroVideoWrapper) {
-        const videoElements = heroVideoWrapper.querySelectorAll('.hero-video');
-        const introClips = [
-            'assets/intro/intro.mp4',
-            'assets/intro/intro2.mp4',
-            'assets/intro/intro3.mp4',
-            'assets/intro/intro4.mp4'
-        ];
+        const primaryVideo = heroVideoWrapper.querySelector('.hero-video');
+        if (primaryVideo) {
+            const introClip = 'assets/intro/intro.mp4';
 
-        if (videoElements.length >= 2 && introClips.length) {
-            let activeVideo = videoElements[0];
-            let bufferVideo = videoElements[1];
-            let activeSource = '';
-
-            function pickNextSource(exclude) {
-                const variants = introClips.filter(src => src !== exclude);
-                const pool = variants.length ? variants : introClips;
-                const index = Math.floor(Math.random() * pool.length);
-                return pool[index];
-            }
-
-            function setVideoSource(video, src) {
-                if (!src) return;
-                video.dataset.src = src;
-                video.src = src;
-                video.load();
-            }
-
-            function playVideo(video) {
+            const startPlayback = () => {
                 const attemptPlay = () => {
-                    video.currentTime = 0;
-                    const maybePromise = video.play();
+                    const maybePromise = primaryVideo.play();
                     if (maybePromise && typeof maybePromise.catch === 'function') {
                         maybePromise.catch(() => {});
                     }
                 };
 
-                if (video.readyState >= 2) {
+                if (primaryVideo.readyState >= 2) {
                     attemptPlay();
                 } else {
-                    video.addEventListener('loadeddata', attemptPlay, { once: true });
+                    primaryVideo.addEventListener('loadeddata', attemptPlay, { once: true });
                 }
+            };
+
+            if (primaryVideo.src !== introClip) {
+                primaryVideo.src = introClip;
+                primaryVideo.load();
             }
-
-            function prepareBuffer() {
-                const nextSrc = pickNextSource(activeSource);
-                setVideoSource(bufferVideo, nextSrc);
-                bufferVideo.currentTime = 0;
-            }
-
-            function swapVideos() {
-                const incoming = bufferVideo;
-                const outgoing = activeVideo;
-
-                playVideo(incoming);
-                incoming.classList.add('is-active');
-                outgoing.classList.remove('is-active');
-
-                activeVideo = incoming;
-                bufferVideo = outgoing;
-                activeSource = activeVideo.dataset.src || activeSource;
-
-                bufferVideo.pause();
-                bufferVideo.currentTime = 0;
-                bufferVideo.classList.remove('is-active');
-                prepareBuffer();
-            }
-
-            function handleEnded() {
-                swapVideos();
-                attachEndedListener();
-            }
-
-            function attachEndedListener() {
-                activeVideo.addEventListener('ended', handleEnded, { once: true });
-            }
-
-            activeSource = pickNextSource('');
-            setVideoSource(activeVideo, activeSource);
-            activeVideo.classList.add('is-active');
-            playVideo(activeVideo);
-
-            prepareBuffer();
-            attachEndedListener();
+            primaryVideo.loop = true;
+            primaryVideo.classList.add('is-active');
+            startPlayback();
         }
     }
 

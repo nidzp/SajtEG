@@ -625,23 +625,23 @@ body::after {
 
 .preloader-lightning {
     position: absolute;
-    inset: -70px;
+    inset: -90px;
     pointer-events: none;
     display: block;
     z-index: -1;
-    filter: drop-shadow(0 0 12px rgba(120,190,255,0.55));
+    filter: drop-shadow(0 0 18px rgba(120,190,255,0.45));
 }
 
 .preloader-lightning .bolt {
     position: absolute;
-    width: 36px;
-    height: 150px;
-    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(168,216,255,0.55) 40%, rgba(255,255,255,0.95) 100%);
-    clip-path: polygon(50% 0%, 70% 12%, 58% 28%, 80% 42%, 52% 100%, 10% 100%, 32% 58%, 12% 44%, 34% 18%);
+    width: 46px;
+    height: 190px;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(180,225,255,0.4) 15%, rgba(168,216,255,0.75) 45%, rgba(255,255,255,0.98) 100%);
+    clip-path: polygon(50% 0%, 70% 12%, 58% 32%, 82% 46%, 54% 100%, 8% 100%, 30% 58%, 12% 46%, 34% 18%);
     mix-blend-mode: screen;
     opacity: 0;
     transform-origin: top center;
-    filter: drop-shadow(0 0 12px rgba(141,211,255,0.85)) drop-shadow(0 0 32px rgba(141,211,255,0.55));
+    filter: drop-shadow(0 0 14px rgba(141,211,255,0.75)) drop-shadow(0 0 36px rgba(141,211,255,0.50));
     --angle: 0deg;
     transform: rotate(var(--angle)) scaleY(0.45) translateY(-14px);
     animation: lightningPulse 3s infinite;
@@ -658,32 +658,32 @@ body::after {
 }
 
 .preloader-lightning .bolt-1 {
-    top: -32px;
-    left: -38px;
+    top: -36px;
+    left: -48px;
     --angle: -18deg;
     animation-duration: 3.6s;
     animation-delay: 0.35s;
 }
 
 .preloader-lightning .bolt-2 {
-    top: -42px;
-    right: -44px;
+    top: -48px;
+    right: -56px;
     --angle: 20deg;
     animation-duration: 3.2s;
     animation-delay: 0.9s;
 }
 
 .preloader-lightning .bolt-3 {
-    bottom: -48px;
-    left: -26px;
+    bottom: -58px;
+    left: -34px;
     --angle: 16deg;
     animation-duration: 3.4s;
     animation-delay: 1.55s;
 }
 
 .preloader-lightning .bolt-4 {
-    bottom: -40px;
-    right: -30px;
+    bottom: -52px;
+    right: -42px;
     --angle: -22deg;
     animation-duration: 3.1s;
     animation-delay: 2.05s;
@@ -691,8 +691,8 @@ body::after {
 
 .preloader-lightning .spark {
     position: absolute;
-    width: 18px;
-    height: 18px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255,255,255,0.95) 0%, rgba(142,205,255,0.65) 45%, rgba(142,205,255,0) 70%);
     opacity: 0;
@@ -701,14 +701,14 @@ body::after {
 }
 
 .preloader-lightning .spark-1 {
-    top: -52px;
-    left: 40%;
+    top: -70px;
+    left: 42%;
     animation-delay: 0.8s;
 }
 
 .preloader-lightning .spark-2 {
-    bottom: -58px;
-    right: 38%;
+    bottom: -74px;
+    right: 40%;
     animation-delay: 1.9s;
 }
 
@@ -2373,10 +2373,24 @@ footer {
 .preloader-text {
     font-size: 2rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.16em;
     color: var(--secondary);
     opacity: 0;
     animation: titleFade 2s forwards 1.5s;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    text-align: center;
+}
+
+.preloader-subtitle {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    color: rgba(226, 239, 255, 0.85);
+    text-transform: uppercase;
 }
 @keyframes logoBlur {
     0% { opacity: 0; filter: blur(28px) drop-shadow(0 0 10px rgba(84,180,255,0.35)) drop-shadow(0 0 24px rgba(84,180,255,0.25)); transform: scale(0.8); }

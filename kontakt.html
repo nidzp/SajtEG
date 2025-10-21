@@ -7,20 +7,33 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kontakt i podrska - ELECTROGROUP ITS</title>
+    <title>Kontakt i podrska - ElectroGroup ITS</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="preloader">
+        <video class="preloader-video" autoplay muted playsinline loop>
+            <source src="assets/intro/intro.mp4" type="video/mp4">
+        </video>
+        <div class="preloader-lightning" aria-hidden="true">
+            <span class="bolt bolt-1"></span>
+            <span class="bolt bolt-2"></span>
+            <span class="bolt bolt-3"></span>
+            <span class="bolt bolt-4"></span>
+            <span class="spark spark-1"></span>
+            <span class="spark spark-2"></span>
+        </div>
         <div class="preloader-content">
-            <img src="assets/logo.png" alt="ElectroGroup logo" class="preloader-logo">
-            <div class="preloader-text">ELECTROGROUP</div>
-            <div class="preloader-lightning"></div>
+            <img src="assets/img/logoreal.jpg" alt="ElectroGroup ITS grb" class="preloader-logo">
+            <div class="preloader-text">
+                ElectroGroup ITS
+                <span class="preloader-subtitle">Visokonaponske instalacije &amp; projekti klju&#269; u ruke</span>
+            </div>
         </div>
     </div>
     <header>
         <div class="container">
-            <a href="index.html#hero" class="logo"><img src="assets/logo.png" alt="ElectroGroup logo"></a>
+            <a href="index.html#hero" class="logo"><img src="assets/img/logoreal.jpg" alt="ElectroGroup ITS grb"></a>
             <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
                 <span class="nav-toggle-icon"></span>
                 <span class="sr-only">Meni</span>
@@ -41,7 +54,7 @@
                 <div class="hero-copy">
                     <p class="eyebrow" data-i18n="support.eyebrow">Podrška i saradnja</p>
                     <h1 data-i18n="support.title">Partner za sigurne elektro sisteme</h1>
-                    <p data-i18n="support.intro">Electrogroup ITS preuzima odgovornost za kompletan elektroenergetski ciklus – od ideje do 24/7 održavanja. Ova strana prikuplja sve kontakt kanale, prikazuje reference i daje jasne smernice kako da pokrenete projekat sa našim timom.</p>
+                    <p data-i18n="support.intro">ElectroGroup ITS preuzima odgovornost za kompletan elektroenergetski ciklus – od ideje do 24/7 održavanja. Ova strana prikuplja sve kontakt kanale, prikazuje reference i daje jasne smernice kako da pokrenete projekat sa našim timom.</p>
                     <div class="hero-actions">
                         <a href="#support-contact" class="btn" data-i18n="support.cta.consult">Zatraži konsultacije</a>
                         <a href="tel:+381631085618" class="btn outline" data-i18n="support.cta.call">Pozovi +381 63 108 5618</a>
@@ -61,10 +74,10 @@
 
         <section class="section company-overview" id="about-company">
             <div class="container">
-                <h2>Electrogroup ITS u brojkama</h2>
+                <h2>ElectroGroup ITS u brojkama</h2>
                 <div class="overview-grid">
                     <article class="overview-text">
-                        <p>Sa sedistem u Somboru, Electrogroup ITS DOO povezuje projektovanje, izvodjenje i servis elektroenergetskih sistema. Na terenu radimo za industriju, infrastrukturu, logistiku, poljoprivredu i javna preduzeca.</p>
+                        <p>Sa sedistem u Somboru, ElectroGroup ITS DOO povezuje projektovanje, izvodjenje i servis elektroenergetskih sistema. Na terenu radimo za industriju, infrastrukturu, logistiku, poljoprivredu i javna preduzeca.</p>
                         <p>Nas inzenjerski tim ukljucuje ovlascene projektante, koordinatore bezbednosti i sertifikovane montere. Kombinujemo sopstvenu proizvodnju razvodnih ormara i mobilnih trafostanica sa pracenjem najnovijih standarda IEC, IEEE i SRPS normi.</p>
                         <ul class="overview-list">
                             <li>Projekti kljuc u ruke za spojnice srednjeg i visokog napona</li>
@@ -395,7 +408,7 @@
                     <form class="contact-form" action="https://formsubmit.co/office@electrogroup.rs" method="POST">
                         <h3 data-i18n="contact.form.title">Onlajn upit</h3>
                         <p class="form-intro" data-i18n="contact.form.intro">Popunite formu kako bismo vas povezali sa odgovornim inženjerom. Obavezna polja označena su sa *.</p>
-                        <input type="hidden" name="_subject" value="Novi upit sa sajta Electrogroup ITS">
+                        <input type="hidden" name="_subject" value="Novi upit sa sajta ElectroGroup ITS">
                         <input type="hidden" name="_captcha" value="false">
                         <input type="hidden" name="_template" value="table">
                         <input type="hidden" name="_autoresponse" value="Hvala na poruci. Nas tim ce vam odgovoriti u najkracem roku.">
@@ -432,7 +445,7 @@
                         </div>
                         <div class="form-consent">
                             <input type="checkbox" id="contact-consent" name="saglasnost" required>
-                            <label for="contact-consent" data-i18n="contact.form.consent">Saglasan/saglasna sam da Electrogroup ITS obrađuje moje podatke radi pripreme ponude.</label>
+                            <label for="contact-consent" data-i18n="contact.form.consent">Saglasan/saglasna sam da ElectroGroup ITS obrađuje moje podatke radi pripreme ponude.</label>
                         </div>
                         <div class="form-actions">
                             <button type="submit" class="btn" data-i18n="contact.form.submit">Pošalji poruku</button>
@@ -445,7 +458,7 @@
     </main>
     <footer>
         <div class="container">
-            <p data-i18n="footer.copy">&copy; 2025 ELECTROGROUP ITS DOO Sombor. Sva prava zadržana.</p>
+            <p data-i18n="footer.copy">&copy; 2025 ElectroGroup ITS DOO Sombor. Sva prava zadržana.</p>
         </div>
     </footer>
     <script type="module" src="support.js"></script>
