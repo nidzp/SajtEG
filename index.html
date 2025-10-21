@@ -43,12 +43,12 @@
                 <span class="sr-only">Meni</span>
             </button>
             <nav id="site-nav" class="site-nav">
-                <a href="#why" class="nav-pill" data-i18n="nav.why">Za&#353;to ELECTROGROUP?</a>
-                <a href="#road-lighting" class="nav-pill" data-i18n="nav.lighting">Osvetljenje</a>
-                <a href="#gallery" class="nav-pill" data-i18n="nav.gallery">Galerija</a>
-                <a href="#faq" class="nav-pill" data-i18n="nav.faq">FAQ</a>
-                <!-- Link to dedicated contact/support page instead of in-page section -->
-                <a href="kontakt.html" class="nav-pill nav-pill--contact" data-i18n="nav.contact">Kontakt</a>
+                <div class="nav-links">
+                    <a href="#why" class="nav-link" data-i18n="nav.why">Za&#353;to ELECTROGROUP?</a>
+                    <a href="kontakt.html" class="nav-link nav-link--cta" data-i18n="nav.contact">Kontakt</a>
+                    <a href="#faq" class="nav-link" data-i18n="nav.faq">FAQ</a>
+                    <a href="#gallery" class="nav-link" data-i18n="nav.gallery">Galerija</a>
+                </div>
             </nav>
         </div>
     </header>
@@ -274,9 +274,6 @@
                     </ul>
                 </div>
             </div>
-            <div class="team-image">
-                <img src="assets/img/radovi_na_visini.jpeg" alt="Bezbednosna ekipa prati radove na visini">
-            </div>
         </div>
     </section>
     <!-- Team section highlighting collective expertise and collaboration -->
@@ -294,6 +291,10 @@
                     <figcaption>Projektantski tim uskla&#273;uje kablovske trase</figcaption>
                 </figure>
                 <figure class="team-photo show-on-scroll">
+                    <img src="assets/img/radovi_na_visini.jpeg" loading="lazy" alt="Bezbednosna ekipa prati radove na visini">
+                    <figcaption>Bezbednosni tim obezbe&#273;uje radove na visini i pod naponom</figcaption>
+                </figure>
+                <figure class="team-photo show-on-scroll">
                     <img src="assets/img/tim2.jpeg" loading="lazy" alt="Nadzor radova na licu mesta">
                     <figcaption>Nadzorni in&#382;enjeri prate kriti&#269;ne priklju&#269;ke</figcaption>
                 </figure>
@@ -308,15 +309,29 @@
             <p class="section-lead">Planiramo, montiramo i odr&#382;avamo savremene sisteme javnog osvetljenja za magistrale, mostove i gradske saobra&#263;ajnice &#8211; od prvog projekta do poslednje kontrole na terenu.</p>
             <div class="lighting-grid show-on-scroll">
                 <figure class="lighting-card">
-                    <video controls playsinline muted loop preload="metadata" class="lighting-video">
-                        <source src="assets/video/timelapse.mp4" type="video/mp4">
-                    </video>
+                    <button class="lighting-preview" type="button" data-video="assets/video/timelapse.mp4" data-title="No&#263;ni timelapse osvetljenja magistralnog puta">
+                        <video class="lighting-preview-video" preload="metadata" muted playsinline>
+                            <source src="assets/video/timelapse.mp4" type="video/mp4">
+                        </video>
+                        <span class="lighting-preview-overlay" aria-hidden="true">
+                            <span class="lighting-preview-icon"></span>
+                            <span class="lighting-preview-label">Pogledaj video</span>
+                        </span>
+                        <span class="sr-only">Pogledaj video: No&#263;ni timelapse osvetljenja magistralnog puta</span>
+                    </button>
                     <figcaption>No&#263;ni timelapse osvetljenja magistralnog puta</figcaption>
                 </figure>
                 <figure class="lighting-card">
-                    <video controls playsinline muted loop preload="metadata" class="lighting-video">
-                        <source src="assets/video/timelapse2.mp4" type="video/mp4">
-                    </video>
+                    <button class="lighting-preview" type="button" data-video="assets/video/timelapse2.mp4" data-title="Osvetljavanje gradske obilaznice sa adaptivnom kontrolom">
+                        <video class="lighting-preview-video" preload="metadata" muted playsinline>
+                            <source src="assets/video/timelapse2.mp4" type="video/mp4">
+                        </video>
+                        <span class="lighting-preview-overlay" aria-hidden="true">
+                            <span class="lighting-preview-icon"></span>
+                            <span class="lighting-preview-label">Pogledaj video</span>
+                        </span>
+                        <span class="sr-only">Pogledaj video: Osvetljavanje gradske obilaznice sa adaptivnom kontrolom</span>
+                    </button>
                     <figcaption>Osvetljavanje gradske obilaznice sa adaptivnom kontrolom</figcaption>
                 </figure>
             </div>
@@ -338,12 +353,6 @@
                 <img src="assets/img/paneli.jpeg" alt="Solarne elektrane">
                 <img src="assets/img/oprema_pomm.jpeg" alt="Električna oprema i razvodni ormari">
                 <img src="assets/img/stubna_trafa.jpeg" alt="Stubna trafostanica i spojnice">
-            </div>
-            <p class="gallery-note">Konceptualne ilustracije koje koristimo u prezentacijama investitorima:</p>
-            <div class="gallery-grid show-on-scroll">
-                <img src="assets/img/service2.png" alt="Koncept modularne trafostanice">
-                <img src="assets/img/service3.png" alt="Koncept visokonaponskog priklju&#269;ka">
-                <img src="assets/img/service4.png" alt="Koncept SCADA nadzora">
             </div>
         </div>
     </section>
@@ -412,6 +421,16 @@
     <div id="lightbox" class="lightbox">
         <span class="lightbox-close">&times;</span>
         <img class="lightbox-img" src="#" alt="Pregled slike">
+    </div>
+
+    <!-- Video overlay for lighting showcases -->
+    <div id="video-overlay" class="video-overlay" aria-hidden="true">
+        <div class="video-overlay__backdrop" data-dismiss="video"></div>
+        <div class="video-overlay__dialog" role="dialog" aria-modal="true">
+            <button type="button" class="video-overlay__close" aria-label="Zatvori video">&times;</button>
+            <video class="video-overlay__player" controls playsinline></video>
+            <p class="video-overlay__title"></p>
+        </div>
     </div>
 
     <!-- Main JavaScript controlling scroll‑triggered animations and header behavior -->

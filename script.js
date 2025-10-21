@@ -409,6 +409,82 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    /* Lighting video overlay interactions */
+    const videoOverlay = document.getElementById('video-overlay');
+    const videoDialog = videoOverlay ? videoOverlay.querySelector('.video-overlay__dialog') : null;
+    const videoPlayer = videoOverlay ? videoOverlay.querySelector('.video-overlay__player') : null;
+    const videoTitle = videoOverlay ? videoOverlay.querySelector('.video-overlay__title') : null;
+    const videoClose = videoOverlay ? videoOverlay.querySelector('.video-overlay__close') : null;
+    const videoBackdrop = videoOverlay ? videoOverlay.querySelector('.video-overlay__backdrop') : null;
+    let lastPreviewTrigger = null;
+
+    const closeVideoOverlay = () => {
+        if (!videoOverlay || !videoPlayer) {
+            return;
+        }
+        videoPlayer.pause();
+        videoPlayer.removeAttribute('src');
+        videoPlayer.load();
+        videoOverlay.classList.remove('show');
+        videoOverlay.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('video-modal-open');
+        if (lastPreviewTrigger) {
+            lastPreviewTrigger.focus({ preventScroll: true });
+            lastPreviewTrigger = null;
+        }
+    };
+
+    if (videoOverlay && videoPlayer) {
+        document.querySelectorAll('.lighting-preview').forEach(button => {
+            button.addEventListener('click', () => {
+                const src = button.dataset.video;
+                if (!src) {
+                    return;
+                }
+                lastPreviewTrigger = button;
+                if (videoTitle) {
+                    videoTitle.textContent = button.dataset.title || '';
+                }
+                videoPlayer.src = src;
+                videoPlayer.load();
+                videoOverlay.classList.add('show');
+                videoOverlay.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('video-modal-open');
+                const attemptPlay = () => {
+                    const maybePlay = videoPlayer.play();
+                    if (maybePlay && typeof maybePlay.catch === 'function') {
+                        maybePlay.catch(() => {});
+                    }
+                };
+                attemptPlay();
+                setTimeout(() => {
+                    if (document.activeElement !== videoPlayer) {
+                        videoPlayer.focus({ preventScroll: true });
+                    }
+                }, 120);
+            });
+        });
+        if (videoClose) {
+            videoClose.addEventListener('click', closeVideoOverlay);
+        }
+        if (videoBackdrop) {
+            videoBackdrop.addEventListener('click', closeVideoOverlay);
+        }
+        if (videoDialog) {
+            videoDialog.addEventListener('click', (evt) => {
+                evt.stopPropagation();
+            });
+        }
+        document.addEventListener('keyup', (evt) => {
+            if (evt.key === 'Escape' && videoOverlay.classList.contains('show')) {
+                closeVideoOverlay();
+            }
+        });
+        videoPlayer.addEventListener('ended', () => {
+            videoPlayer.currentTime = 0;
+        });
+    }
+
     /* Simple AI chatbox interactions using keywords */
     // FAQ accordion toggle functionality
     document.querySelectorAll('.faq-question').forEach(question => {
