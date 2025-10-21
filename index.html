@@ -43,14 +43,12 @@
                 <span class="sr-only">Meni</span>
             </button>
             <nav id="site-nav" class="site-nav">
-                <a href="#about" data-i18n="nav.about">Ko smo mi</a>
-                <a href="#focus" data-i18n="nav.focus">Fokus</a>
-                <a href="#trafostanice" data-i18n="nav.trafo">Trafostanice</a>
-                <a href="#team" data-i18n="nav.team">Tim</a>
-                <a href="#gallery" data-i18n="nav.gallery">Galerija</a>
-                <a href="#faq" data-i18n="nav.faq">FAQ</a>
+                <a href="#why" class="nav-pill" data-i18n="nav.why">Za&#353;to ELECTROGROUP?</a>
+                <a href="#road-lighting" class="nav-pill" data-i18n="nav.lighting">Osvetljenje</a>
+                <a href="#gallery" class="nav-pill" data-i18n="nav.gallery">Galerija</a>
+                <a href="#faq" class="nav-pill" data-i18n="nav.faq">FAQ</a>
                 <!-- Link to dedicated contact/support page instead of in-page section -->
-                <a href="kontakt.html" class="btn" data-i18n="nav.contact">Kontakt</a>
+                <a href="kontakt.html" class="nav-pill nav-pill--contact" data-i18n="nav.contact">Kontakt</a>
             </nav>
         </div>
     </header>
@@ -68,24 +66,25 @@
                  script will split the ElectroGroup text into spans and animate
                  them sequentially.  The subtitle and tagline fade in after
                  the title completes. -->
-            <h1 class="hero-title">ElectroGroup ITS</h1>
+            <h1 class="hero-title">ELECTROGROUP</h1>
+            <p class="hero-title-secondary">ITS DOO</p>
             <h2 class="hero-subtitle">In&#382;enjering elektroenergetskih sistema</h2>
             <!-- Tagline summarising our mission in a few words -->
             <p class="hero-tagline">Pouzdana energija od ideje do pu&#353;tanja u pogon</p>
             <div class="hero-buttons">
                 <a href="kontakt.html" class="btn">Po&#353;alji upit</a>
                 <!-- Scroll down to the About section -->
-                <a href="#about" class="btn outline">Saznaj vi&#353;e</a>
+                <a href="#why" class="btn outline">Saznaj vi&#353;e</a>
             </div>
         </div>
         <!-- Scroll indicator; bounces to invite the user to scroll -->
-        <a href="#about" class="scroll-down" aria-label="Scroll down"><span class="arrow">&#8595;</span></a>
+        <a href="#why" class="scroll-down" aria-label="Scroll down"><span class="arrow">&#8595;</span></a>
     </section>
 
-    <!-- About section introducing the company and its strengths -->
-    <section id="about" class="section about">
-        <div class="container">
-            <h2>Ko smo mi</h2>
+    <!-- Why ElectroGroup section introducing the company's strengths -->
+    <section id="why" class="section about">
+        <div class="container" id="about">
+            <h2>Za&#353;to ELECTROGROUP?</h2>
             <p>Mi u ElectroGroup ITS pomeramo granice u elektroinženjeringu, posebno u pogledu sigurnosti i pouzdane distribucije energije. Naš tim okuplja vrhunske inženjere i stručnjake sa decenijskim iskustvom. Prvi smo implementirali novi Zakon o bezbednosti – naši sistemi rade u skladu s najsavremenijim propisima čim stupe na snagu. Realizovali smo brojne zahtevne projekte u industriji i energetici, postavljajući temelje za pametnije elektro mreže u regionu. Naš recept za uspeh je jednostavan: vrhunsko znanje podeljeno u snažnom timu, inovativna rešenja i neprekidna briga o bezbednosti.</p>
         </div>
     </section>
@@ -234,6 +233,28 @@
                 <figure class="team-photo show-on-scroll">
                     <img src="assets/img/tim2.jpeg" loading="lazy" alt="Nadzor radova na licu mesta">
                     <figcaption>Nadzorni in&#382;enjeri prate kriti&#269;ne priklju&#269;ke</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- Road lighting showcase highlighting our national projects -->
+    <section id="road-lighting" class="section lighting">
+        <div class="container">
+            <h2>Osvetljenje puteva Srbije</h2>
+            <p class="section-lead">Planiramo, montiramo i odr&#382;avamo savremene sisteme javnog osvetljenja za magistrale, mostove i gradske saobra&#263;ajnice &#8211; od prvog projekta do poslednje kontrole na terenu.</p>
+            <div class="lighting-grid show-on-scroll">
+                <figure class="lighting-card">
+                    <video controls playsinline muted loop preload="metadata" class="lighting-video">
+                        <source src="assets/video/timelapse.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>No&#263;ni timelapse osvetljenja magistralnog puta</figcaption>
+                </figure>
+                <figure class="lighting-card">
+                    <video controls playsinline muted loop preload="metadata" class="lighting-video">
+                        <source src="assets/video/timelapse2.mp4" type="video/mp4">
+                    </video>
+                    <figcaption>Osvetljavanje gradske obilaznice sa adaptivnom kontrolom</figcaption>
                 </figure>
             </div>
         </div>

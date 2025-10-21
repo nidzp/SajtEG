@@ -98,6 +98,7 @@
 
   const srLat = {
     brand: 'ELECTROGROUP',
+    'nav.why': 'Za\u0161to ELECTROGROUP?',
     'nav.about': 'Ko smo mi',
     'nav.focus': 'Fokus',
     'nav.trafo': 'Trafostanice',
@@ -140,9 +141,9 @@
     Object.entries(srLat).map(([key, value]) => [key, latinToCyrillic(value)])
   );
   srCyr.brand = srLat.brand; // zadržati brend u latiničnoj formi
-
   const en = {
     brand: 'ELECTROGROUP',
+    'nav.why': 'Why ELECTROGROUP?',
     'nav.about': 'About',
     'nav.focus': 'Focus',
     'nav.trafo': 'Substations',
@@ -150,11 +151,11 @@
     'nav.gallery': 'Gallery',
     'nav.faq': 'FAQ',
     'nav.contact': 'Contact',
-    'footer.copy': '© 2025 ELECTROGROUP ITS LLC Sombor. All rights reserved.',
+    'footer.copy': '\u00A9 2025 ELECTROGROUP ITS LLC Sombor. All rights reserved.',
 
     'support.eyebrow': 'Support and cooperation',
     'support.title': 'Partner for reliable electrical systems',
-    'support.intro': 'Electrogroup ITS takes responsibility for the entire power cycle – from concept to 24/7 maintenance. This page collects all contact channels, shows references, and gives clear guidance to start a project with our team.',
+    'support.intro': 'Electrogroup ITS takes responsibility for the entire power cycle - from concept to 24/7 maintenance. This page collects all contact channels, shows references, and gives clear guidance to start a project with our team.',
     'support.cta.consult': 'Request consultation',
     'support.cta.call': 'Call +381 63 108 5618',
     'support.hl.1': 'Licensed engineers and electricians for MV and HV',
@@ -299,3 +300,6 @@
     initLang(langSel);
   });
 })();
+
+
+

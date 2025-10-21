@@ -282,25 +282,36 @@ document.addEventListener('DOMContentLoaded', () => {
      * have appeared, the subtitle and tagline are revealed by
      * toggling the `.show` class on those elements.
      */
-    const heroTitle = document.querySelector('.hero-title');
-    if (heroTitle) {
-        const text = heroTitle.textContent.trim();
-        heroTitle.textContent = '';
+    const animateTitleLine = (element, startDelay = 0, step = 0.1) => {
+        if (!element) {
+            return startDelay;
+        }
+        const text = element.textContent.trim();
+        element.textContent = '';
         [...text].forEach((char, idx) => {
             const span = document.createElement('span');
-            span.textContent = char;
-            // Apply incremental delay so letters appear one after another
-            span.style.animationDelay = `${idx * 0.1}s`;
-            heroTitle.appendChild(span);
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.animationDelay = `${startDelay + idx * step}s`;
+            element.appendChild(span);
         });
-        // After the title animation ends, reveal subtitle and tagline
-        const subtitle = document.querySelector('.hero-subtitle');
-        const tagline = document.querySelector('.hero-tagline');
-        const totalDuration = text.length * 0.1 + 0.6; // seconds
+        return startDelay + text.length * step + 0.6;
+    };
+
+    const primaryTitle = document.querySelector('.hero-title');
+    const secondaryTitle = document.querySelector('.hero-title-secondary');
+    const subtitle = document.querySelector('.hero-subtitle');
+    const tagline = document.querySelector('.hero-tagline');
+
+    if (primaryTitle) {
+        const primaryEnd = animateTitleLine(primaryTitle, 0, 0.1);
+        const secondaryStart = secondaryTitle ? Math.max(0.25, primaryEnd - 0.4) : primaryEnd;
+        const secondaryEnd = secondaryTitle ? animateTitleLine(secondaryTitle, secondaryStart, 0.08) : primaryEnd;
+
+        const revealDelay = Math.max(primaryEnd, secondaryEnd);
         setTimeout(() => {
             if (subtitle) subtitle.classList.add('show');
             if (tagline) tagline.classList.add('show');
-        }, totalDuration * 1000);
+        }, revealDelay * 1000);
     }
 
     /*
