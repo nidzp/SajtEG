@@ -6,6 +6,9 @@
  * Observer is used to reveal elements as they enter the viewport.
  */
 
+import gsap from 'gsap';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import './assets/ui.js';
 
 const initPreloaderLightning = () => {
@@ -235,27 +238,51 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // IntersectionObserver to reveal elements when they are near the viewport
-    const observerOptions = {
-        threshold: 0.2
+    const initScrollAnimations = () => {
+        const revealTargets = document.querySelectorAll('.show-on-scroll');
+        if (!revealTargets.length) {
+            return;
+        }
+
+        const canUseAOS = typeof AOS === 'function' && typeof AOS.init === 'function';
+        if (canUseAOS) {
+            revealTargets.forEach((el, idx) => {
+                if (!el.dataset.aos) {
+                    el.dataset.aos = 'fade-up';
+                }
+                if (!el.dataset.aosDelay) {
+                    el.dataset.aosDelay = `${Math.min(idx * 60, 300)}`;
+                }
+                if (!el.dataset.aosOffset) {
+                    el.dataset.aosOffset = '80';
+                }
+            });
+
+            AOS.init({
+                duration: 600,
+                once: true,
+                offset: 80,
+                easing: 'ease-out'
+            });
+        }
+
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+
+            revealTargets.forEach(el => observer.observe(el));
+        } else {
+            revealTargets.forEach(el => el.classList.add('show'));
+        }
     };
-    const observer = new IntersectionObserver((entries, obs) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('show');
-                obs.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-    // Observe all elements with 'show-on-scroll' class
-    document.querySelectorAll('.show-on-scroll').forEach(el => {
-        observer.observe(el);
-    });
-    // Observe gallery grid separately
-    const gallery = document.querySelector('.gallery-grid');
-    if (gallery) {
-        observer.observe(gallery);
-    }
+
+    initScrollAnimations();
 
     // Sequentially reveal transformer cards once the section enters the viewport
     const trafoGrid = document.querySelector('.trafo-grid');
@@ -312,6 +339,18 @@ document.addEventListener('DOMContentLoaded', () => {
             if (subtitle) subtitle.classList.add('show');
             if (tagline) tagline.classList.add('show');
         }, revealDelay * 1000);
+
+        const heroButtons = document.querySelectorAll('.hero-buttons .btn');
+        if (heroButtons.length && typeof gsap === 'object' && typeof gsap.from === 'function') {
+            gsap.from(heroButtons, {
+                opacity: 0,
+                y: 18,
+                stagger: 0.18,
+                delay: revealDelay + 0.1,
+                duration: 0.6,
+                ease: 'power2.out'
+            });
+        }
     }
 
     /*
